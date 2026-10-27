@@ -35,7 +35,6 @@ Kết quả đo một video mẫu cùng thể loại dài 15:33. Video mẫu và
 
 **Cách đẩy nhịp hài:** nói dữ kiện thật → minh họa theo nghĩa đen → cắt về người dẫn với một câu nhận xét khô → sang dữ kiện tiếp theo.
 
-**Người dẫn của kênh:** thiết kế riêng (đầu tròn, mũ len xanh có quả bông vàng, áo hoodie cam). Không dùng lại nhân vật của kênh khác.
 
 ## Quy tắc vẽ (đo từ ảnh 1280×720 của video mẫu, 2026-10-27)
 - **Ba cấp nét.**

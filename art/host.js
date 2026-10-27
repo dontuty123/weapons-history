@@ -5,12 +5,12 @@
   const INK = "#1b1b1f";
   const ln = (w, c = INK) => `stroke="${c}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
   const L8 = ln(8), L6 = ln(6), L5 = ln(5);
-  const C = { skin: "#fde7dc", hair: "#14a3a0", hairDark: "#0f8784", shirt: "#f6eedb", scarf: "#e2483d", scarfDark: "#b83228", shoe: "#2f3140", mouth: "#c0303a", blush: "#f5b2a8" };
+  const C = { skin: "#fde7dc", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
-  const HEAD = "M-92 -470 C-92 -548 -50 -566 0 -566 C52 -566 94 -548 94 -470 L92 -370 C92 -330 66 -318 0 -318 C-66 -318 -92 -330 -92 -370Z";
+  const HEAD = "M-94 -540 L84 -556 L100 -470 L96 -372 L56 -320 L-58 -320 L-96 -370 Z";
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
-  const HAIR = "M-100 -440 C-112 -540 -60 -584 10 -582 C80 -580 110 -540 102 -462 C96 -486 80 -494 62 -490 L48 -470 L34 -494 L14 -468 L-2 -490 L-22 -460 L-40 -478 C-56 -452 -68 -424 -76 -392 C-90 -404 -98 -420 -100 -440Z";
+  const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
   const EX = {
     lecture: { eye: "closed", brow: "up", mouth: "talk" },
@@ -33,19 +33,20 @@
     const brow = (x, s) => {
       const t = { up: [-4, 4], flat: [0, 0], high: [-14, -14], worried: [6, -8] }[e.brow] || [0, 0];
       const inner = s < 0 ? t[0] : t[0], outer = t[1];
-      return `<path d="M${x - 14 * s * -1} ${ey - 34 + (s < 0 ? outer : inner)} L${x + 14 * s * -1} ${ey - 34 + (s < 0 ? inner : outer)}" ${ln(6)}/>`;
+      const yo = ey - 36 + (s < 0 ? outer : inner), yi = ey - 36 + (s < 0 ? inner : outer), xo = x - 18 * s * -1, xi = x + 16 * s * -1;
+      return `<path d="M${xo} ${yo} L${xi} ${yi} L${xi} ${yi + 8} L${xo} ${yo + 4}Z" fill="${INK}" ${ln(3)}/>`;
     };
     const mouth = {
-      talk: `<path d="M-11 ${my - 7} Q0 ${my - 11} 11 ${my - 7} Q12 ${my + 12} 0 ${my + 13} Q-12 ${my + 12} -11 ${my - 7}Z" fill="${C.mouth}" ${L5}/>`,
+      talk: `<path d="M-14 ${my - 7} L14 ${my - 7} L6 ${my + 13} L-6 ${my + 13}Z" fill="${C.mouth}" ${L5}/>`,
       small: `<path d="M-8 ${my} q8 5 16 0" fill="none" ${L5}/>`,
       flat: `<path d="M-12 ${my} h24" ${L6}/>`,
       smirk: `<path d="M-14 ${my + 3} Q4 ${my + 7} 18 ${my - 6}" fill="none" ${L6}/>`,
-      open: `<path d="M-20 ${my - 6} H20 Q16 ${my + 18} 0 ${my + 18} Q-16 ${my + 18} -20 ${my - 6}Z" fill="${C.mouth}" ${L5}/>`,
+      open: `<path d="M-22 ${my - 6} H22 L10 ${my + 18} H-10Z" fill="${C.mouth}" ${L5}/><path d="M-18 ${my - 4} H18 V${my + 2} H-18Z" fill="#fff"/>`,
       o: `<ellipse cx="0" cy="${my + 2}" rx="10" ry="14" fill="${C.mouth}" ${L5}/>`,
       wobble: `<path d="M-16 ${my + 2} q4 -6 8 0 q4 6 8 0 q4 -6 8 0" fill="none" ${L5}/>`,
     }[e.mouth];
     return brow(-dx, -1) + brow(dx, 1) + eye(-dx) + eye(dx) + mouth +
-      `<ellipse cx="-58" cy="${my - 14}" rx="13" ry="7" fill="${C.blush}" opacity=".75"/><ellipse cx="58" cy="${my - 14}" rx="13" ry="7" fill="${C.blush}" opacity=".75"/>`;
+      `<path d="M-72 ${my - 10} l10 -12 M-60 ${my - 10} l10 -12 M50 ${my - 10} l10 -12 M62 ${my - 10} l10 -12" ${ln(4, C.blush)}/>`;
   }
 
   // hands
@@ -78,16 +79,15 @@
     const p = POSE[pose] || POSE.lecture;
     const body = `
       <path d="M-20 -176 L-26 -26 M20 -176 L28 -26" ${L8}/>
-      <path d="M-58 -14 Q-60 -36 -30 -36 Q-6 -36 -4 -16 Q-4 0 -30 0 Q-56 0 -58 -14Z" fill="${C.shoe}" ${L6}/><path d="M62 -14 Q64 -36 34 -36 Q10 -36 8 -16 Q8 0 34 0 Q60 0 62 -14Z" fill="${C.shoe}" ${L6}/>
-      <path d="M-50 -304 L-62 -170 L62 -170 L50 -304 Q0 -318 -50 -304Z" fill="${C.shirt}" ${L8}/>
+      <path d="M-62 -6 L-58 -34 L-8 -34 L-4 -6Z" fill="${C.shoe}" ${L6}/><path d="M-62 -6 H-4" ${ln(8, C.sole)}/><path d="M66 -6 L62 -34 L12 -34 L8 -6Z" fill="${C.shoe}" ${L6}/><path d="M66 -6 H8" ${ln(8, C.sole)}/>
+      <path d="M-52 -308 L-66 -170 L66 -170 L52 -308Z" fill="${C.shirt}" ${L8}/><path d="M30 -306 L44 -172 L62 -172 L50 -306Z" fill="${C.shirtDark}"/><path d="M-52 -308 L-66 -170 L66 -170 L52 -308Z" fill="none" ${L8}/><path d="M-62 -196 H62" ${ln(4, C.shirtDark)}/>
       <path d="${p.arms}" fill="none" ${L8}/>${p.hands}`;
-    const scarf = `<path d="M-60 -326 Q0 -300 60 -326 L58 -298 Q0 -272 -58 -298Z" fill="${C.scarf}" ${L6}/>
-      <path d="M-40 -302 L-62 -236 L-36 -230 L-24 -296Z" fill="${C.scarf}" ${L6}/><path d="M-30 -296 L-40 -250" ${ln(3, C.scarfDark)}/>`;
+    const scarf = `<path d="M-62 -330 L62 -330 L60 -298 L-60 -298Z" fill="${C.scarf}" ${L6}/><path d="M-44 -300 L-70 -226 L-46 -222 L-26 -298Z" fill="${C.scarf}" ${L6}/><path d="M-36 -296 L-54 -240" ${ln(3, C.scarfDark)}/><path d="M-30 -326 V-302 M10 -326 V-302" ${ln(3, C.scarfDark)}/>`;
     const head = `
-      <path d="M-92 -446 a14 20 0 1 0 2 40" fill="${C.skin}" ${L6}/><path d="M94 -446 a14 20 0 1 1 -2 40" fill="${C.skin}" ${L6}/>
+      <path d="M-94 -450 L-118 -440 L-112 -404 L-94 -398Z" fill="${C.skin}" ${L6}/><path d="M98 -456 L122 -446 L116 -410 L97 -402Z" fill="${C.skin}" ${L6}/>
       <path d="${HEAD}" fill="${C.skin}" ${L8}/>
       ${face(fname || p.face)}
-      <path d="${HAIR}" fill="${C.hair}" ${L8}/><path d="M-50 -540 Q10 -572 70 -540" fill="none" ${ln(5, C.hairDark)}/><path d="M-70 -500 Q-60 -540 -20 -556" fill="none" ${ln(7, "#5fd0cc")}/>
+      <path d="${HAIR}" fill="${C.hair}" ${L8}/><path d="M-80 -520 L-40 -566 L30 -578" fill="none" ${ln(7, C.hairHi)}/><path d="M-96 -420 L-90 -500" fill="none" ${ln(5, C.hairDark)}/>
       ${COSTUME[costume]}`;
     return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})">${body}${scarf}${head}${p.front || ""}</g>`;
   }

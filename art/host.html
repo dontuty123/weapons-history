@@ -16,6 +16,7 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
   figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
   svg{display:block;width:100%;height:auto;aspect-ratio:16/9;max-width:100%}
+  .swatches{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 12px}.swatches span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 4px;font-size:14px}.swatches span::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--c);border:2px solid #1b1b1f}
   figcaption{padding:6px 10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
 </style>
 <div class="wrap">
@@ -34,8 +35,20 @@
 </ol>
 
 <h2>Remy áp dụng thế nào</h2>
-<p>Mảng màu đặc trưng là mái tóc xanh ngọc chải lệch một bên. Đầu là khối chữ nhật bo tròn, cằm phẳng. Món đồ đi kèm là chiếc khăn quàng đỏ. Áo màu kem để tóc và khăn nổi lên.</p>
-
+<p>Đầu là khối nhiều góc: đỉnh hơi nghiêng, quai hàm vát, cằm phẳng. Tóc là một mảng xanh ngọc sắc cạnh, mái vát chéo che thái dương trái, hai mũi tóc nhọn chĩa ra sau. Lông mày là hai nét nêm, miệng nói là hình thang. Áo đỏ san hô, khăn vàng mù tạt, giày đen đế trắng.</p>
+<h2>Format nhất quán của kênh</h2>
+<div class="swatches">
+  <span style="--c:#12b5ad">Xanh ngọc #12b5ad · tóc Remy</span>
+  <span style="--c:#f2433a">Đỏ san hô #f2433a · áo Remy</span>
+  <span style="--c:#ffc93c">Vàng mù tạt #ffc93c · khăn Remy</span>
+  <span style="--c:#1b1b1f">Viền đen #1b1b1f · dày 8 px trên khung 720</span>
+</div>
+<ol>
+  <li>Ba màu nhận diện trên chỉ dành cho Remy. Nhân vật phụ và nền dùng màu pastel dịu để Remy luôn nổi nhất.</li>
+  <li>Mọi nhân vật đều viền đen 8 px, đồ vật 5 px, nền 2 px xanh than. Không đổ bóng, chỉ một mảng tối phẳng ở một bên áo.</li>
+  <li>Phòng quay của Remy luôn là nền trắng. Remy luôn đứng bên phải khi có ảnh hoặc TV, quay vào chỉ.</li>
+  <li>Vòng tròn mục lục dùng màu nhạt của ba màu nhận diện, viền đen. Chú thích dưới ảnh dùng chữ viết tay màu đen.</li>
+</ol>
 <h2>Kho tư thế</h2>
 <div class="grid" id="poses"></div>
 <h2>Cỡ khung</h2>

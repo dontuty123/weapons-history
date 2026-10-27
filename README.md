@@ -36,3 +36,28 @@ Kết quả đo một video mẫu cùng thể loại dài 15:33. Video mẫu và
 **Cách đẩy nhịp hài:** nói dữ kiện thật → minh họa theo nghĩa đen → cắt về người dẫn với một câu nhận xét khô → sang dữ kiện tiếp theo.
 
 **Người dẫn của kênh:** thiết kế riêng (đầu tròn, mũ len xanh có quả bông vàng, áo hoodie cam). Không dùng lại nhân vật của kênh khác.
+
+## Quy tắc vẽ (đo từ ảnh 1280×720 của video mẫu, 2026-10-27)
+- **Ba cấp nét.**
+  - Viền nhân vật khoảng 8 px, gần đen.
+  - Đồ vật và nội thất 4–5 px.
+  - Đồi, nền và biểu tượng mục lục 2 px, màu xanh than.
+  - Mây và vệt sáng không có viền.
+- **Màu phẳng.**
+  - Không đổ bóng, chỉ có má hồng và vài vệt sáng.
+  - Da hồng rất nhạt; nền pastel (trời chuyển nhẹ từ xanh sang trắng, cỏ xanh ngọc nhạt, đồi xanh và tím nhạt).
+  - Chỉ đồ vật mới dùng màu đậm.
+- **Tỉ lệ.**
+  - Đầu to, chiếm khoảng 40% chiều cao.
+  - Thân nhỏ; tay chân là một nét que cùng độ dày với viền.
+  - Bàn tay và bàn chân là hình tròn đầy màu.
+- **Mặt.**
+  - Mắt chấm, mắt nhắm là hai vòng cung, mắt lim dim khi nhận xét khô.
+  - Lông mày là nét ngắn; miệng nhỏ màu đỏ khi nói, một nét ngang khi tỉnh bơ.
+- **Nét hơi run như vẽ tay** (một lớp nhiễu nhẹ phủ lên nhân vật), không dùng nét thẳng tuyệt đối.
+- **Bố cục.**
+  - Nhân vật trong cảnh to, bị mép dưới khung cắt ngang.
+  - Người dẫn đứng một bên, chừa nhiều khoảng trắng.
+  - Ô ảnh thật đặt bên trái, chú thích viết tay ngay dưới ảnh, người dẫn bên phải quay vào chỉ.
+- **Bộ vẽ:** `art/kit.js` vẽ mọi khung bằng SVG 1280×720. Xem thử ở `art/sample.html`.
+- **Người dẫn của kênh:** tóc xanh than rối có một chỏm, áo len cam gạch cổ kem, bút chì kẹp sau tai. Các nhân vật phụ cũng thiết kế riêng.

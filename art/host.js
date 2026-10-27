@@ -9,12 +9,12 @@
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
   const HEADS = {
-    mochi:  { name: "V mềm (má đầy, cằm nhỏ tròn)", d: "M-94 -492 C-96 -546 -60 -568 -8 -570 C50 -572 96 -550 100 -494 C104 -430 98 -392 70 -360 C46 -334 22 -318 0 -318 C-22 -318 -48 -334 -70 -360 C-98 -392 -100 -430 -94 -492 Z" },
-    oval:   { name: "Trái xoan", d: "M-92 -480 C-92 -548 -50 -570 0 -570 C52 -570 96 -546 96 -480 C96 -400 64 -320 2 -318 C-60 -320 -92 -400 -92 -480 Z" },
-    square: { name: "Vuông bo góc", d: "M-94 -500 C-94 -552 -56 -570 0 -570 C56 -570 98 -552 98 -500 L100 -390 C100 -340 74 -320 40 -320 L-38 -320 C-72 -320 -96 -340 -96 -390 Z" },
-    heart:  { name: "Trái tim (trán rộng, cằm thon tròn)", d: "M-100 -486 C-104 -548 -62 -572 -6 -572 C54 -572 104 -548 102 -486 C100 -444 88 -408 64 -376 C42 -346 22 -322 0 -320 C-22 -322 -42 -346 -64 -376 C-88 -408 -98 -444 -100 -486 Z" },
+    chamfer: { name: "Mặt dài, cằm vát hai góc", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -374 L54 -314 L-52 -314 L-90 -374 Z" },
+    block:   { name: "Mặt dài, cằm vuông phẳng", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -338 L72 -314 L-70 -314 L-90 -338 Z" },
+    taper:   { name: "Mặt dài thon dần, cằm hẹp phẳng", sharp: true, d: "M-96 -500 C-96 -552 -58 -570 0 -570 C58 -570 98 -552 98 -500 L86 -366 L40 -314 L-38 -314 L-84 -366 Z" },
+    cheek:   { name: "Mặt dài, gò má gãy cao", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -414 L62 -318 L-60 -318 L-90 -414 Z" },
   };
-  const HEAD = HEADS.mochi.d;
+  const HEAD = HEADS.chamfer.d;
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -121,8 +121,8 @@
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, detail: '<path d="M-26 -308 Q0 -290 26 -308" fill="none" stroke="#1b1b1f" stroke-width="5" stroke-linecap="round"/>', neck: satchel(L.bag, L.flap, L.top) } }; };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "mochi" } = {}) {
-    const HD = (HEADS[headShape] || HEADS.mochi).d;
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "chamfer" } = {}) {
+    const HO = HEADS[headShape] || HEADS.chamfer, HD = HO.d;
     const lo = look ? lookOpts(look) : null;
     if (lo) hair = lo.hair;
     const H0 = HAIRS[hair] || HAIRS.swept, H = lo ? { ...H0, c: lo.hairC } : H0, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);
@@ -135,7 +135,7 @@
     const scarf = O.neck;
     const head = `
       <path d="M-94 -446 C-122 -452 -126 -404 -94 -398" fill="${C.skin}" ${L6}/><path d="M100 -450 C128 -456 132 -408 100 -402" fill="${C.skin}" ${L6}/>
-      <path d="${HD}" fill="${C.skin}" ${L8}/>
+      <path d="${HD}" fill="${C.skin}" stroke="${INK}" stroke-width="8" stroke-linejoin="${HO.sharp ? "miter" : "round"}" stroke-miterlimit="6"/>
       ${face(fname || p.face)}
       ${(H.top || "").replace(/HAIRC/g, H.c)}<path d="${H.d}" fill="${H.c}" ${L8}/>${H.strands ? `<path d="${H.strands}" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>` : ""}${H.extra || ""}<path d="${H.hi}" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       ${COSTUME[costume]}`;

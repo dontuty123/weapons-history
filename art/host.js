@@ -8,7 +8,7 @@
   const C = { skin: "#fdeee4", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
-  const HEAD = "M-94 -540 L84 -556 L100 -470 L96 -372 L56 -320 L-58 -320 L-96 -370 Z";
+  const HEAD = "M-96 -536 L86 -560 L104 -476 L98 -398 L60 -322 L-56 -322 L-100 -392 Z";
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -83,8 +83,9 @@
     visor: { name: "Mái nhọn chĩa trước", c: "#7a3fd1", d: "M-104 -430 L-106 -540 L-50 -586 L60 -590 L100 -548 L156 -512 L110 -508 L132 -486 L70 -494 L80 -474 L20 -484 L-10 -466 L-40 -478 L-60 -452 Z", hi: "M-40 -566 L60 -568 L110 -530", strands: "M-30 -580 L40 -500 M20 -588 L90 -514 M-70 -556 L-20 -488" },
   };
   const OUTFITS = {
-    brand: { name: "Áo đào nhạt + khăn đỏ rượu (bộ chuẩn)", body: "#ffd2b0", dark: "#f2b48c",
-      neck: '<path d="M-62 -330 L62 -330 L60 -298 L-60 -298Z" fill="#7a1e3a" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-44 -300 L-70 -226 L-46 -222 L-26 -298Z" fill="#7a1e3a" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-36 -296 L-54 -240" stroke="#a83a5a" stroke-width="3" stroke-linecap="round"/>' },
+    brand: { name: "Áo đào nhạt + túi đưa thư đỏ rượu (bộ chuẩn)", body: "#ffd2b0", dark: "#f2b48c",
+      detail: '<path d="M-40 -312 L74 -196" stroke="#7a1e3a" stroke-width="16" stroke-linecap="round"/><path d="M-40 -312 L74 -196" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round" opacity="0"/>',
+      neck: '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="#7a1e3a" stroke-width="12" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="#7a1e3a" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="#9b2a4c" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="#ffd2b0" stroke="#1b1b1f" stroke-width="4"/>' },
     tee: { name: "Áo thun đỏ + khăn vàng", body: "#f2433a", dark: "#c92e27",
       neck: '<path d="M-62 -330 L62 -330 L60 -298 L-60 -298Z" fill="#ffc93c" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-44 -300 L-70 -226 L-46 -222 L-26 -298Z" fill="#ffc93c" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
     varsity: { name: "Áo khoác bóng chày", body: "#1e3a8a", dark: "#162c69",

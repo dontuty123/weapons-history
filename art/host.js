@@ -9,12 +9,13 @@
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
   const HEADS = {
+    mochi:   { name: "V mềm (má đầy, cằm nhỏ tròn) — chuẩn", d: "M-94 -492 C-96 -546 -60 -568 -8 -570 C50 -572 96 -550 100 -494 C104 -430 98 -392 70 -360 C46 -334 22 -318 0 -318 C-22 -318 -48 -334 -70 -360 C-98 -392 -100 -430 -94 -492 Z" },
     chamfer: { name: "Mặt dài, cằm vát hai góc", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -374 L54 -314 L-52 -314 L-90 -374 Z" },
     block:   { name: "Mặt dài, cằm vuông phẳng", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -338 L72 -314 L-70 -314 L-90 -338 Z" },
     taper:   { name: "Mặt dài thon dần, cằm hẹp phẳng", sharp: true, d: "M-96 -500 C-96 -552 -58 -570 0 -570 C58 -570 98 -552 98 -500 L86 -366 L40 -314 L-38 -314 L-84 -366 Z" },
     cheek:   { name: "Mặt dài, gò má gãy cao", sharp: true, d: "M-90 -500 C-90 -552 -56 -570 0 -570 C56 -570 92 -552 92 -500 L92 -414 L62 -318 L-60 -318 L-90 -414 Z" },
   };
-  const HEAD = HEADS.chamfer.d;
+  const HEAD = HEADS.mochi.d;
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -121,8 +122,8 @@
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, detail: '<path d="M-26 -308 Q0 -290 26 -308" fill="none" stroke="#1b1b1f" stroke-width="5" stroke-linecap="round"/>', neck: satchel(L.bag, L.flap, L.top) } }; };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "chamfer" } = {}) {
-    const HO = HEADS[headShape] || HEADS.chamfer, HD = HO.d;
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "mochi" } = {}) {
+    const HO = HEADS[headShape] || HEADS.mochi, HD = HO.d;
     const lo = look ? lookOpts(look) : null;
     if (lo) hair = lo.hair;
     const H0 = HAIRS[hair] || HAIRS.swept, H = lo ? { ...H0, c: lo.hairC } : H0, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);

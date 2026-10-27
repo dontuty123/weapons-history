@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy Attitude</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--bg:#f0eee9;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px} h2{font-size:19px;margin:22px 0 8px} p{margin:0 0 12px;color:var(--muted);max-width:72ch}
+  .row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{padding:6px 10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+</style>
+<div class="wrap">
+<h1>Remy: thông minh, láu cá hơn</h1>
+<p>Mắt hạnh nhân có mí đậm, lông mày một bên nhướn, cười nhếch một bên, má hồng nhỏ lại. Hàng trên: trước và sau. Hàng dưới: bộ biểu cảm mới trên ba kiểu tóc để bạn so.</p>
+<h2>Trước → sau</h2>
+<div class="row" id="ba"></div>
+<h2>Bộ biểu cảm mới</h2>
+<div id="sets"></div>
+</div>
+<script src="host.js?v=21"></script>
+<script>
+const {host} = HOST;
+const box = (inner) => `<svg viewBox="-170 -700 340 420" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="#fff"/>${inner}</svg>`;
+const fig = (svg, cap) => `<figure>${svg}<figcaption>${cap}</figcaption></figure>`;
+const base = {look:"raspberry", pose:"relax", x:0, y:0, s:1};
+document.getElementById("ba").innerHTML =
+  fig(box(host({...base, face:"lecture"})), "Trước: mắt nhắm, miệng tròn") +
+  fig(box(host({...base, face:"neutral"})), "Trước: mắt chấm") +
+  fig(box(host({...base, face:"smart"})), "Sau: đang giảng") +
+  fig(box(host({...base, face:"sly"})), "Sau: láu cá");
+const faces = [["smart","Đang giảng, tự tin"],["sly","Liếc láu cá"],["confident","Cười đắc ý"],["scheming","Có mưu"],["deadpan","Tỉnh bơ"],["shock","Bất ngờ"]];
+document.getElementById("sets").innerHTML = [["brushupTex","Brush-up tỉa lọn"],["blade","Mái cắt chéo sắc"],["zigzag","Rẽ ngôi zíc zắc"]].map(([h,n]) =>
+  `<h2 style="font-size:16px">${n}</h2><div class="row">${faces.map(([f,c]) => fig(box(host({...base, hairStyle:h, face:f})), c)).join("")}</div>`).join("");
+</script>

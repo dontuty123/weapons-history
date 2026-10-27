@@ -20,6 +20,10 @@
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
   const EX = {
+    smart: { eye: "almond", brow: "cocky", mouth: "smirkTalk" },
+    sly: { eye: "sly", brow: "cocky", mouth: "smirk" },
+    confident: { eye: "almond", brow: "up", mouth: "grinSide" },
+    scheming: { eye: "sly", brow: "angry", mouth: "grinSide" },
     lecture: { eye: "closed", brow: "up", mouth: "talk" },
     neutral: { eye: "dot", brow: "flat", mouth: "small" },
     deadpan: { eye: "half", brow: "flat", mouth: "flat" },
@@ -33,12 +37,14 @@
     const eye = x => ({
       closed: `<path d="M${x - 15} ${ey} q15 11 30 0" fill="none" ${L6}/>`,
       happy: `<path d="M${x - 15} ${ey + 5} q15 -15 30 0" fill="none" ${L6}/>`,
+      almond: `<path d="M${x - 18} ${ey + 1} Q${x} ${ey - 13} ${x + 18} ${ey - 2} Q${x} ${ey + 10} ${x - 18} ${ey + 1}Z" fill="#fff" ${ln(4)}/><circle cx="${x + 3}" cy="${ey - 1}" r="7.5" fill="${INK}"/><circle cx="${x + 5.5}" cy="${ey - 4}" r="2.6" fill="#fff"/><path d="M${x - 21} ${ey + 1} Q${x} ${ey - 16} ${x + 21} ${ey - 3}" fill="none" ${ln(7)}/>`,
+      sly: `<path d="M${x - 18} ${ey - 1} Q${x} ${ey - 6} ${x + 18} ${ey - 3} Q${x} ${ey + 8} ${x - 18} ${ey - 1}Z" fill="#fff" ${ln(4)}/><circle cx="${x + 8}" cy="${ey + 1}" r="6" fill="${INK}"/><path d="M${x - 21} ${ey - 1} Q${x} ${ey - 9} ${x + 21} ${ey - 4}" fill="none" ${ln(8)}/>`,
       half: `<path d="M${x - 16} ${ey - 2} h32" ${L6}/><path d="M${x - 9} ${ey - 2} a9 9 0 0 0 18 0Z" fill="${INK}"/>`,
       wide: `<circle cx="${x}" cy="${ey}" r="15" fill="#fff" ${L5}/><circle cx="${x}" cy="${ey + 1}" r="6" fill="${INK}"/>`,
       dot: `<circle cx="${x}" cy="${ey}" r="8" fill="${INK}"/>`,
     }[e.eye]);
     const brow = (x, s) => {
-      const t = { up: [-4, 4], flat: [0, 0], high: [-14, -14], worried: [6, -8] }[e.brow] || [0, 0];
+      const t = e.brow === "cocky" ? (s > 0 ? [-14, -6] : [5, 1]) : ({ up: [-4, 4], flat: [0, 0], high: [-14, -14], worried: [6, -8], angry: [8, -4] }[e.brow] || [0, 0]);
       const inner = s < 0 ? t[0] : t[0], outer = t[1];
       const yo = ey - 36 + (s < 0 ? outer : inner), yi = ey - 36 + (s < 0 ? inner : outer), xo = x - 20 * s * -1, xi = x + 16 * s * -1, xm = (xo + xi) / 2, ym = Math.min(yo, yi) - 7;
       return `<path d="M${xi} ${yi + 4} Q${xm} ${ym} ${xo} ${yo} Q${xm} ${ym + 9} ${xi} ${yi + 4}Z" fill="${INK}" ${ln(4)}/>`;
@@ -48,12 +54,14 @@
       small: `<path d="M-8 ${my} q8 5 16 0" fill="none" ${L5}/>`,
       flat: `<path d="M-12 ${my} h24" ${L6}/>`,
       smirk: `<path d="M-14 ${my + 3} Q4 ${my + 7} 18 ${my - 6}" fill="none" ${L6}/>`,
+      smirkTalk: `<path d="M-14 ${my - 3} Q4 ${my - 7} 20 ${my - 12} Q17 ${my + 10} 3 ${my + 11} Q-11 ${my + 9} -14 ${my - 3}Z" fill="${C.mouth}" ${L5}/>`,
+      grinSide: `<path d="M-20 ${my - 2} Q2 ${my + 2} 24 ${my - 12} Q20 ${my + 14} 2 ${my + 14} Q-14 ${my + 12} -20 ${my - 2}Z" fill="${C.mouth}" ${L5}/><path d="M-16 ${my} Q4 ${my + 2} 21 ${my - 9} L20 ${my - 3} Q4 ${my + 6} -15 ${my + 4}Z" fill="#fff"/>`,
       open: `<path d="M-20 ${my - 6} Q0 ${my - 9} 20 ${my - 6} Q16 ${my + 20} 0 ${my + 20} Q-16 ${my + 20} -20 ${my - 6}Z" fill="${C.mouth}" ${L5}/>`,
       o: `<ellipse cx="0" cy="${my + 2}" rx="10" ry="14" fill="${C.mouth}" ${L5}/>`,
       wobble: `<path d="M-16 ${my + 2} q4 -6 8 0 q4 6 8 0 q4 -6 8 0" fill="none" ${L5}/>`,
     }[e.mouth];
     return brow(-dx, -1) + brow(dx, 1) + eye(-dx) + eye(dx) + mouth +
-      `<ellipse cx="-60" cy="${my - 14}" rx="14" ry="7" fill="${C.blush}" opacity=".8"/><ellipse cx="62" cy="${my - 14}" rx="14" ry="7" fill="${C.blush}" opacity=".8"/>`;
+      `<ellipse cx="-58" cy="${my - 12}" rx="10" ry="5" fill="${C.blush}" opacity=".5"/><ellipse cx="60" cy="${my - 12}" rx="10" ry="5" fill="${C.blush}" opacity=".5"/>`;
   }
 
   // hands
@@ -65,12 +73,12 @@
   // pose library: arms drawn as single stick strokes (genre convention), hands as listed
   const SH = [-48, -292], SR = [48, -292];
   const POSE = {
-    lecture: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q104 -300 112 -380`, hands: fist(-66, -168) + finger(114, -392, 6), face: "lecture" },
-    present: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q110 -258 170 -270`, hands: fist(-66, -168) + palm(186, -276, 78), face: "neutral" },
+    lecture: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q104 -300 112 -380`, hands: fist(-66, -168) + finger(114, -392, 6), face: "smart" },
+    present: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q110 -258 170 -270`, hands: fist(-66, -168) + palm(186, -276, 78), face: "confident" },
     shrug: { arms: `M${SH} Q-120 -250 -142 -300 M${SR} Q120 -250 142 -300`, hands: palm(-150, -312, -16) + palm(150, -312, 16), face: "deadpan" },
-    chest: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q90 -220 20 -238`, hands: fist(-66, -168) + palm(10, -246, -70), face: "smug" },
+    chest: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q90 -220 20 -238`, hands: fist(-66, -168) + palm(10, -246, -70), face: "sly" },
     cross: { arms: `M${SH} Q-70 -240 30 -236 M${SR} Q70 -220 -30 -214`, hands: fist(38, -238) + fist(-38, -214), face: "deadpan" },
-    ok: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q110 -290 108 -350`, hands: fist(-66, -168) + okHand(108, -362), face: "happy" },
+    ok: { arms: `M${SH} Q-74 -230 -66 -176 M${SR} Q110 -290 108 -350`, hands: fist(-66, -168) + okHand(108, -362), face: "confident" },
     shock: { arms: `M${SH} Q-120 -330 -128 -420 M${SR} Q120 -330 128 -420`, hands: palm(-130, -432, -10) + palm(130, -432, 10), face: "shock" },
     read: { arms: `M${SH} Q-80 -250 -40 -262 M${SR} Q80 -250 40 -262`, hands: "", face: "neutral", front: `<g><path d="M-70 -300 L0 -290 L70 -300 L70 -220 L0 -210 L-70 -220Z" fill="#3c6fb0" ${L6}/><path d="M0 -290 V-210" ${L5}/></g>` + fist(-60, -262) + fist(60, -262) },
   };

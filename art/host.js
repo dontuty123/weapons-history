@@ -8,7 +8,13 @@
   const C = { skin: "#fdeee4", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
-  const HEAD = "M-92 -496 C-94 -546 -60 -568 -8 -570 C50 -572 94 -552 98 -498 L100 -432 C100 -404 92 -386 74 -366 L20 -318 Q0 -306 -20 -318 L-72 -366 C-90 -386 -94 -404 -94 -432 Z";
+  const HEADS = {
+    mochi:  { name: "V mềm (má đầy, cằm nhỏ tròn)", d: "M-94 -492 C-96 -546 -60 -568 -8 -570 C50 -572 96 -550 100 -494 C104 -430 98 -392 70 -360 C46 -334 22 -318 0 -318 C-22 -318 -48 -334 -70 -360 C-98 -392 -100 -430 -94 -492 Z" },
+    oval:   { name: "Trái xoan", d: "M-92 -480 C-92 -548 -50 -570 0 -570 C52 -570 96 -546 96 -480 C96 -400 64 -320 2 -318 C-60 -320 -92 -400 -92 -480 Z" },
+    square: { name: "Vuông bo góc", d: "M-94 -500 C-94 -552 -56 -570 0 -570 C56 -570 98 -552 98 -500 L100 -390 C100 -340 74 -320 40 -320 L-38 -320 C-72 -320 -96 -340 -96 -390 Z" },
+    heart:  { name: "Trái tim (trán rộng, cằm thon tròn)", d: "M-100 -486 C-104 -548 -62 -572 -6 -572 C54 -572 104 -548 102 -486 C100 -444 88 -408 64 -376 C42 -346 22 -322 0 -320 C-22 -322 -42 -346 -64 -376 C-88 -408 -98 -444 -100 -486 Z" },
+  };
+  const HEAD = HEADS.mochi.d;
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -103,7 +109,7 @@
       neck: '<path d="M-40 -320 L40 -320 L0 -270Z" fill="#e33b2f" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
   };
 
-  const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="28" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="17" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
+  const satchel = (bag, flap, buckle) => '<path d="M-40 -304 L40 -214" stroke="#1b1b1f" stroke-width="15" stroke-linecap="round"/><path d="M-40 -304 L40 -214" stroke="' + bag + '" stroke-width="7" stroke-linecap="round"/><path d="M14 -226 H58 Q62 -226 62 -222 L60 -186 Q60 -180 54 -180 H18 Q12 -180 12 -186 L10 -222 Q10 -226 14 -226Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="5" stroke-linejoin="round"/><path d="M11 -210 H61" stroke="#1b1b1f" stroke-width="4"/>';
   // warm signature hues only: scenes are blue sky and green grass, so the host must sit on the opposite side of the wheel
   const LOOKS = {
     raspberry: { name: "Hồng mâm xôi · cam mơ · navy (bộ chuẩn)", hair: "wave", hairC: "#d6336c", top: "#ffa95e", topD: "#ef8a3a", bag: "#1f2a5c", flap: "#2e3d80", bg: "#b0607e" },
@@ -115,7 +121,8 @@
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, detail: '<path d="M-26 -308 Q0 -290 26 -308" fill="none" stroke="#1b1b1f" stroke-width="5" stroke-linecap="round"/>', neck: satchel(L.bag, L.flap, L.top) } }; };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null } = {}) {
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "mochi" } = {}) {
+    const HD = (HEADS[headShape] || HEADS.mochi).d;
     const lo = look ? lookOpts(look) : null;
     if (lo) hair = lo.hair;
     const H0 = HAIRS[hair] || HAIRS.swept, H = lo ? { ...H0, c: lo.hairC } : H0, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);
@@ -128,7 +135,7 @@
     const scarf = O.neck;
     const head = `
       <path d="M-94 -446 C-122 -452 -126 -404 -94 -398" fill="${C.skin}" ${L6}/><path d="M100 -450 C128 -456 132 -408 100 -402" fill="${C.skin}" ${L6}/>
-      <path d="${HEAD}" fill="${C.skin}" ${L8}/>
+      <path d="${HD}" fill="${C.skin}" ${L8}/>
       ${face(fname || p.face)}
       ${(H.top || "").replace(/HAIRC/g, H.c)}<path d="${H.d}" fill="${H.c}" ${L8}/>${H.strands ? `<path d="${H.strands}" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>` : ""}${H.extra || ""}<path d="${H.hi}" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       ${COSTUME[costume]}`;
@@ -147,5 +154,5 @@
       </g>
       <circle cx="256" cy="256" r="246" fill="none" stroke="#1b1b1f" stroke-width="10"/></svg>`;
   }
-  g.HOST = { LOOKS, avatar,  host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
+  g.HOST = { HEADS, LOOKS, avatar,  host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
 })(window);

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy Faces</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--bg:#f0eee9;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px} p{margin:0 0 16px;color:var(--muted);max-width:72ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .shots{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line)}
+  .shots svg{display:block;width:100%;height:auto}
+  .card b{display:block;padding:10px 14px;font-size:17px}
+  @media (max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Bốn khuôn mặt cho Remy</h1>
+<p>Cùng bộ 1 (tóc sóng hồng mâm xôi, áo cam mơ, túi navy). Mỗi hàng: cận mặt khi giảng, cận mặt tỉnh bơ, toàn thân. Chọn một khuôn và gửi mình số thứ tự.</p>
+<div class="grid" id="g"></div>
+</div>
+<script src="host.js?v=10"></script>
+<script>
+const {host, HEADS} = HOST;
+const box = (inner, vb) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="#fff"/>${inner}</svg>`;
+document.getElementById("g").innerHTML = Object.entries(HEADS).map(([k,h],i) => `<div class="card"><div class="shots">
+  ${box(host({look:"raspberry",headShape:k,pose:"lecture",x:0,y:0,s:1}), "-170 -660 340 380")}
+  ${box(host({look:"raspberry",headShape:k,pose:"relax",face:"deadpan",x:0,y:0,s:1}), "-170 -660 340 380")}
+  ${box(host({look:"raspberry",headShape:k,pose:"present",x:0,y:0,s:1}), "-260 -680 520 700")}
+</div><b>${i+1}. ${h.name}</b></div>`).join("");
+</script>

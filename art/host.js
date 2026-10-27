@@ -8,7 +8,7 @@
   const C = { skin: "#fdeee4", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
-  const HEAD = "M-96 -536 L86 -560 L104 -476 L98 -398 L60 -322 L-56 -322 L-100 -392 Z";
+  const HEAD = "M-92 -496 C-94 -546 -60 -568 -8 -570 C50 -572 94 -552 98 -498 L100 -414 C100 -374 86 -352 62 -334 Q22 -314 -20 -318 Q-64 -322 -84 -350 C-94 -366 -94 -392 -94 -414 Z";
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -33,20 +33,20 @@
     const brow = (x, s) => {
       const t = { up: [-4, 4], flat: [0, 0], high: [-14, -14], worried: [6, -8] }[e.brow] || [0, 0];
       const inner = s < 0 ? t[0] : t[0], outer = t[1];
-      const yo = ey - 36 + (s < 0 ? outer : inner), yi = ey - 36 + (s < 0 ? inner : outer), xo = x - 18 * s * -1, xi = x + 16 * s * -1;
-      return `<path d="M${xo} ${yo} L${xi} ${yi} L${xi} ${yi + 8} L${xo} ${yo + 4}Z" fill="${INK}" ${ln(3)}/>`;
+      const yo = ey - 36 + (s < 0 ? outer : inner), yi = ey - 36 + (s < 0 ? inner : outer), xo = x - 20 * s * -1, xi = x + 16 * s * -1, xm = (xo + xi) / 2, ym = Math.min(yo, yi) - 7;
+      return `<path d="M${xi} ${yi + 4} Q${xm} ${ym} ${xo} ${yo} Q${xm} ${ym + 9} ${xi} ${yi + 4}Z" fill="${INK}" ${ln(4)}/>`;
     };
     const mouth = {
-      talk: `<path d="M-14 ${my - 7} L14 ${my - 7} L6 ${my + 13} L-6 ${my + 13}Z" fill="${C.mouth}" ${L5}/>`,
+      talk: `<path d="M-13 ${my - 7} Q0 ${my - 10} 13 ${my - 7} Q11 ${my + 13} 0 ${my + 14} Q-11 ${my + 13} -13 ${my - 7}Z" fill="${C.mouth}" ${L5}/>`,
       small: `<path d="M-8 ${my} q8 5 16 0" fill="none" ${L5}/>`,
       flat: `<path d="M-12 ${my} h24" ${L6}/>`,
       smirk: `<path d="M-14 ${my + 3} Q4 ${my + 7} 18 ${my - 6}" fill="none" ${L6}/>`,
-      open: `<path d="M-22 ${my - 6} H22 L10 ${my + 18} H-10Z" fill="${C.mouth}" ${L5}/><path d="M-18 ${my - 4} H18 V${my + 2} H-18Z" fill="#fff"/>`,
+      open: `<path d="M-20 ${my - 6} Q0 ${my - 9} 20 ${my - 6} Q16 ${my + 20} 0 ${my + 20} Q-16 ${my + 20} -20 ${my - 6}Z" fill="${C.mouth}" ${L5}/>`,
       o: `<ellipse cx="0" cy="${my + 2}" rx="10" ry="14" fill="${C.mouth}" ${L5}/>`,
       wobble: `<path d="M-16 ${my + 2} q4 -6 8 0 q4 6 8 0 q4 -6 8 0" fill="none" ${L5}/>`,
     }[e.mouth];
     return brow(-dx, -1) + brow(dx, 1) + eye(-dx) + eye(dx) + mouth +
-      `<path d="M-72 ${my - 10} l10 -12 M-60 ${my - 10} l10 -12 M50 ${my - 10} l10 -12 M62 ${my - 10} l10 -12" ${ln(4, C.blush)}/>`;
+      `<ellipse cx="-60" cy="${my - 14}" rx="14" ry="7" fill="${C.blush}" opacity=".8"/><ellipse cx="62" cy="${my - 14}" rx="14" ry="7" fill="${C.blush}" opacity=".8"/>`;
   }
 
   // hands
@@ -76,6 +76,7 @@
   };
 
   const HAIRS = {
+    wave: { name: "Mái sóng hất ngang", c: "#d6336c", d: "M-104 -426 C-122 -480 -112 -544 -62 -576 C-10 -608 72 -600 106 -558 C124 -534 126 -496 114 -466 C106 -484 94 -494 80 -496 C84 -486 78 -472 62 -464 C58 -480 46 -494 26 -498 C24 -480 12 -466 -10 -458 C-10 -476 -22 -488 -42 -490 C-48 -462 -68 -440 -104 -426 Z", hi: "M-70 -540 C-40 -572 10 -580 50 -566", top: '<path d="M6 -598 C14 -642 58 -656 80 -634 C56 -636 36 -622 30 -598Z" fill="HAIRC" stroke="#1b1b1f" stroke-width="7" stroke-linejoin="round"/>', strands: "M-60 -548 C-30 -520 -20 -500 -24 -488 M30 -580 C60 -560 74 -530 72 -508" },
     swept: { name: "Vuốt chéo ra sau", c: "#14a89f", d: "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z", hi: "M-80 -520 L-40 -566 L30 -578", strands: "M-40 -560 L70 -540 M-20 -520 L90 -520 M-90 -470 L-60 -540" },
     flattop: { name: "Đầu đinh vuông", c: "#2b2d6e", d: "M-100 -470 L-102 -582 L96 -598 L104 -480 L84 -498 L70 -484 L52 -500 L30 -486 L8 -502 L-14 -488 L-36 -502 L-58 -486 L-80 -498 Z", hi: "M-80 -572 L70 -584", strands: "M-60 -580 L-62 -510 M-20 -584 L-22 -514 M20 -588 L18 -516 M60 -590 L58 -510", extra: '<path d="M-98 -470 L-96 -420 M100 -480 L98 -430" stroke="#2b2d6e" stroke-width="10" stroke-linecap="round" opacity=".45"/>' },
     blunt: { name: "Mái bằng cắt thẳng", c: "#e8452f", d: "M-108 -380 L-112 -540 L-70 -590 L60 -600 L110 -560 L114 -390 L96 -390 L94 -470 L76 -456 L60 -474 L40 -458 L20 -476 L0 -458 L-20 -474 L-40 -456 L-60 -472 L-80 -456 L-92 -462 L-94 -380 Z", hi: "M-70 -570 L40 -582", strands: "M-104 -500 L-100 -400 M104 -500 L106 -400 M-40 -580 L-46 -480 M20 -584 L16 -482" },
@@ -105,12 +106,12 @@
   const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="12" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
   // warm signature hues only: scenes are blue sky and green grass, so the host must sit on the opposite side of the wheel
   const LOOKS = {
-    raspberry: { name: "Hồng mâm xôi · kem · nâu sô-cô-la", hair: "swept", hairC: "#d6336c", top: "#fff3e6", topD: "#f3dcc4", bag: "#4a2618", flap: "#653424", bg: "#b07a8c" },
-    watermelon:{ name: "Hồng dưa hấu · trắng ngà · chàm đậm", hair: "blunt", hairC: "#f0506e", top: "#fff6ee", topD: "#f0e0d2", bag: "#232c5c", flap: "#2f3b78", bg: "#b98089" },
-    coral:     { name: "Đỏ san hô · tím sữa · navy", hair: "visor", hairC: "#f25c54", top: "#efe6ff", topD: "#d9cbf5", bag: "#1f2a4d", flap: "#2b3a68", bg: "#b8847e" },
-    tangerine: { name: "Cam quýt · hồng phấn · đỏ rượu", hair: "swept", hairC: "#ff7a1a", top: "#ffe3ea", topD: "#f5c6d2", bag: "#6b1730", flap: "#8a2240", bg: "#c0906c" },
-    cherry:    { name: "Đỏ anh đào · kem bơ · than chì", hair: "flattop", hairC: "#d7263d", top: "#fff1d9", topD: "#f2dbb4", bag: "#2b2b33", flap: "#3d3d48", bg: "#a9787f" },
-    orchid:    { name: "Hồng tím · đào sữa · nâu cà phê", hair: "topknot", hairC: "#b8329e", top: "#ffe4d2", topD: "#f3c9ad", bag: "#4a2a1c", flap: "#61392a", bg: "#9a7a98" },
+    raspberry: { name: "Hồng mâm xôi · kem · nâu sô-cô-la", hair: "wave", hairC: "#d6336c", top: "#fff3e6", topD: "#f3dcc4", bag: "#4a2618", flap: "#653424", bg: "#b07a8c" },
+    watermelon:{ name: "Hồng dưa hấu · trắng ngà · chàm đậm", hair: "wave", hairC: "#f0506e", top: "#fff6ee", topD: "#f0e0d2", bag: "#232c5c", flap: "#2f3b78", bg: "#b98089" },
+    coral:     { name: "Đỏ san hô · tím sữa · navy", hair: "wave", hairC: "#f25c54", top: "#efe6ff", topD: "#d9cbf5", bag: "#1f2a4d", flap: "#2b3a68", bg: "#b8847e" },
+    tangerine: { name: "Cam quýt · hồng phấn · đỏ rượu", hair: "wave", hairC: "#ff7a1a", top: "#ffe3ea", topD: "#f5c6d2", bag: "#6b1730", flap: "#8a2240", bg: "#c0906c" },
+    cherry:    { name: "Đỏ anh đào · kem bơ · than chì", hair: "wave", hairC: "#d7263d", top: "#fff1d9", topD: "#f2dbb4", bag: "#2b2b33", flap: "#3d3d48", bg: "#a9787f" },
+    orchid:    { name: "Hồng tím · đào sữa · nâu cà phê", hair: "wave", hairC: "#b8329e", top: "#ffe4d2", topD: "#f3c9ad", bag: "#4a2a1c", flap: "#61392a", bg: "#9a7a98" },
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, neck: satchel(L.bag, L.flap, L.top) } }; };
 
@@ -126,10 +127,10 @@
       <path d="${p.arms}" fill="none" ${L8}/>${p.hands}`;
     const scarf = O.neck;
     const head = `
-      <path d="M-94 -450 L-118 -440 L-112 -404 L-94 -398Z" fill="${C.skin}" ${L6}/><path d="M98 -456 L122 -446 L116 -410 L97 -402Z" fill="${C.skin}" ${L6}/>
+      <path d="M-94 -446 C-122 -452 -126 -404 -94 -398" fill="${C.skin}" ${L6}/><path d="M100 -450 C128 -456 132 -408 100 -402" fill="${C.skin}" ${L6}/>
       <path d="${HEAD}" fill="${C.skin}" ${L8}/>
       ${face(fname || p.face)}
-      ${H.top || ""}<path d="${H.d}" fill="${H.c}" ${L8}/>${H.strands ? `<path d="${H.strands}" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>` : ""}${H.extra || ""}<path d="${H.hi}" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      ${(H.top || "").replace(/HAIRC/g, H.c)}<path d="${H.d}" fill="${H.c}" ${L8}/>${H.strands ? `<path d="${H.strands}" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>` : ""}${H.extra || ""}<path d="${H.hi}" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       ${COSTUME[costume]}`;
     return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})">${body}${scarf}${head}${p.front || ""}</g>`;
   }

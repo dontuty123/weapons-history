@@ -20,10 +20,10 @@
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
   const EX = {
-    smart: { eye: "almond", brow: "cocky", mouth: "smirkTalk" },
-    sly: { eye: "sly", brow: "cocky", mouth: "smirk" },
-    confident: { eye: "almond", brow: "up", mouth: "grinSide" },
-    scheming: { eye: "sly", brow: "angry", mouth: "grinSide" },
+    smart: { eye: "half", brow: "cocky", mouth: "smirkTalk" },
+    sly: { eye: "halfSide", brow: "cocky", mouth: "smirk" },
+    confident: { eye: "half", brow: "up", mouth: "grinSide" },
+    scheming: { eye: "halfSide", brow: "angry", mouth: "grinSide" },
     lecture: { eye: "closed", brow: "up", mouth: "talk" },
     neutral: { eye: "dot", brow: "flat", mouth: "small" },
     deadpan: { eye: "half", brow: "flat", mouth: "flat" },
@@ -39,6 +39,7 @@
       happy: `<path d="M${x - 15} ${ey + 5} q15 -15 30 0" fill="none" ${L6}/>`,
       almond: `<path d="M${x - 18} ${ey + 1} Q${x} ${ey - 13} ${x + 18} ${ey - 2} Q${x} ${ey + 10} ${x - 18} ${ey + 1}Z" fill="#fff" ${ln(4)}/><circle cx="${x + 3}" cy="${ey - 1}" r="7.5" fill="${INK}"/><circle cx="${x + 5.5}" cy="${ey - 4}" r="2.6" fill="#fff"/><path d="M${x - 21} ${ey + 1} Q${x} ${ey - 16} ${x + 21} ${ey - 3}" fill="none" ${ln(7)}/>`,
       sly: `<path d="M${x - 18} ${ey - 1} Q${x} ${ey - 6} ${x + 18} ${ey - 3} Q${x} ${ey + 8} ${x - 18} ${ey - 1}Z" fill="#fff" ${ln(4)}/><circle cx="${x + 8}" cy="${ey + 1}" r="6" fill="${INK}"/><path d="M${x - 21} ${ey - 1} Q${x} ${ey - 9} ${x + 21} ${ey - 4}" fill="none" ${ln(8)}/>`,
+      halfSide: `<path d="M${x - 16} ${ey - 2} h32" ${L6}/><path d="M${x - 1} ${ey - 2} a9 9 0 0 0 18 0Z" fill="${INK}"/>`,
       half: `<path d="M${x - 16} ${ey - 2} h32" ${L6}/><path d="M${x - 9} ${ey - 2} a9 9 0 0 0 18 0Z" fill="${INK}"/>`,
       wide: `<circle cx="${x}" cy="${ey}" r="15" fill="#fff" ${L5}/><circle cx="${x}" cy="${ey + 1}" r="6" fill="${INK}"/>`,
       dot: `<circle cx="${x}" cy="${ey}" r="8" fill="${INK}"/>`,

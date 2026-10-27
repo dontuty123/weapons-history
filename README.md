@@ -60,3 +60,6 @@ Kết quả đo một video mẫu cùng thể loại dài 15:33. Video mẫu và
   - Ô ảnh thật đặt bên trái, chú thích viết tay ngay dưới ảnh, người dẫn bên phải quay vào chỉ.
 - **Bộ vẽ:** `art/kit.js` vẽ mọi khung bằng SVG 1280×720. Xem thử ở `art/sample.html`.
 - **Người dẫn của kênh:** tóc xanh than rối có một chỏm, áo len cam gạch cổ kem, bút chì kẹp sau tai. Các nhân vật phụ cũng thiết kế riêng.
+
+## Người dẫn Remy
+Bảy nguyên tắc học từ cách người dẫn của video mẫu được thiết kế và diễn, cùng kho tư thế, cỡ khung và cách hóa trang của Remy: xem `art/host.html` (bộ vẽ `art/host.js`). Remy là thiết kế riêng: tóc xanh ngọc chải lệch, đầu khối chữ nhật bo tròn, khăn quàng đỏ, áo kem.

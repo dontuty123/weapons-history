@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Host Design Notes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap">
+<style>
+  :root{--bg:#efede7;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.55}
+  .wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px}
+  h2{font-size:20px;margin:28px 0 10px}
+  p{max-width:70ch;margin:0 0 8px}
+  ol{max-width:76ch;padding-left:22px;margin:0}
+  ol li{margin-bottom:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  svg{display:block;width:100%;height:auto;aspect-ratio:16/9;max-width:100%}
+  figcaption{padding:6px 10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+</style>
+<div class="wrap">
+<h1>Người dẫn của kênh: Remy</h1>
+<p>Học từ cách nhân vật chính của video mẫu được thiết kế và diễn, rồi áp vào một nhân vật riêng. Không vẽ lại nhân vật của kênh mẫu.</p>
+
+<h2>Bảy nguyên tắc rút ra từ video mẫu</h2>
+<ol>
+  <li><b>Một mảng màu đặc trưng thật đậm.</b> Tóc là mảng màu bão hòa nhất trên người, khác hẳn mọi thứ khác trong khung. Nhìn ảnh thu nhỏ vẫn nhận ra ngay.</li>
+  <li><b>Hình đầu rõ, đọc được khi nhỏ.</b> Đầu to hơn thân, khối đơn giản, ít chi tiết. Thân chỉ là một chiếc áo nhỏ, tay chân là nét que.</li>
+  <li><b>Một món đồ đi kèm trong mọi khung.</b> Món đồ cố định như một dấu hiệu nhận diện, lặp lại xuyên suốt video.</li>
+  <li><b>Mặt rất tối giản.</b> Không có mũi. Mắt thường nhắm thành hai vòng cung khi đang giảng, mắt lim dim khi nhận xét khô, miệng nhỏ màu đỏ. Biểu cảm chủ yếu do lông mày và hình mắt.</li>
+  <li><b>Kho tư thế nhỏ, dùng đi dùng lại.</b> Khoảng tám tư thế: giơ ngón tay giảng, ngửa tay chỉ vào ảnh, nhún vai, tay đặt lên ngực, đọc sách đeo kính, ra dấu OK, chỉ vào TV. Khoảng hơn một nửa số khung lấy mẫu có người dẫn, gần như luôn là một trong mấy tư thế này.</li>
+  <li><b>Người dẫn ở "phòng quay" trắng, không vào cảnh kể chuyện.</b> Cảnh minh họa dùng nhân vật khác; người dẫn chỉ đứng cạnh ảnh hoặc cạnh TV để bình luận. Khi đứng cạnh ảnh, người dẫn luôn ở bên phải và quay vào ảnh.</li>
+  <li><b>Hóa trang cho câu đùa nhưng giữ dáng.</b> Thỉnh thoảng đội mũ, đeo kính hay mặc trang phục theo chủ đề, nhưng dáng đầu và mảng màu đặc trưng vẫn còn nên vẫn nhận ra.</li>
+</ol>
+
+<h2>Remy áp dụng thế nào</h2>
+<p>Mảng màu đặc trưng là mái tóc xanh ngọc chải lệch một bên. Đầu là khối chữ nhật bo tròn, cằm phẳng. Món đồ đi kèm là chiếc khăn quàng đỏ. Áo màu kem để tóc và khăn nổi lên.</p>
+
+<h2>Kho tư thế</h2>
+<div class="grid" id="poses"></div>
+<h2>Cỡ khung</h2>
+<div class="grid" id="framing"></div>
+<h2>Hóa trang (giữ dáng)</h2>
+<div class="grid" id="costume"></div>
+</div>
+<script src="host.js"></script>
+<script>
+const {host} = HOST;
+const fr = (s, bg="#fff") => `<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg"><rect width="1280" height="720" fill="${bg}"/>${s}</svg>`;
+const fig = (svg, cap) => `<figure>${svg}<figcaption>${cap}</figcaption></figure>`;
+const poses = [["lecture","Giơ ngón tay giảng (dùng nhiều nhất)"],["present","Ngửa tay chỉ vào ảnh"],["shrug","Nhún vai, mặt tỉnh bơ"],["chest","Tay lên ngực, mặt đắc ý"],["cross","Khoanh tay"],["ok","Ra dấu OK"],["shock","Hoảng hốt"],["read","Đọc sách"]];
+document.getElementById("poses").innerHTML = poses.map(([p,c]) => fig(fr(host({pose:p,x:640,y:700,s:1.2})), c)).join("");
+const photo = `<rect x="110" y="70" width="560" height="460" fill="#e8e3d6"/><text x="390" y="310" font-family="Nunito" font-size="28" fill="#857d6b" text-anchor="middle">ảnh hiện vật thật</text>`;
+document.getElementById("framing").innerHTML = [
+  fig(fr(host({pose:"lecture",x:640,y:690,s:1})), "Toàn thân giữa khung trắng: câu chuyển ý"),
+  fig(fr(photo + host({pose:"present",x:990,y:820,s:1.15,flip:true})), "Bên phải ảnh, quay vào chỉ: dữ kiện"),
+  fig(fr(host({pose:"shrug",x:760,y:1300,s:2.1,face:"deadpan"})), "Cận ngang ngực: câu đùa khô"),
+].join("");
+document.getElementById("costume").innerHTML = [
+  fig(fr(host({pose:"read",costume:"scholar",x:640,y:690,s:1.1})), "Kính đọc sách: \"theo sử sách ghi lại…\""),
+  fig(fr(host({pose:"lecture",costume:"knight",x:640,y:700,s:1.05,face:"smug"})), "Mũ hiệp sĩ: chương kiếm dài, áo giáp"),
+  fig(fr(host({pose:"chest",x:640,y:690,s:1.1})), "Bản gốc để so dáng"),
+].join("");
+</script>

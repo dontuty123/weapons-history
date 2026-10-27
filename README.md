@@ -62,4 +62,4 @@ Kết quả đo một video mẫu cùng thể loại dài 15:33. Video mẫu và
 - **Người dẫn của kênh:** tóc xanh than rối có một chỏm, áo len cam gạch cổ kem, bút chì kẹp sau tai. Các nhân vật phụ cũng thiết kế riêng.
 
 ## Người dẫn Remy
-Bảy nguyên tắc học từ cách người dẫn của video mẫu được thiết kế và diễn, cùng kho tư thế, cỡ khung và cách hóa trang của Remy: xem `art/host.html` (bộ vẽ `art/host.js`). Remy là thiết kế riêng, sắc cạnh: tóc xanh ngọc #12b5ad vuốt chéo ra sau, mái vát che thái dương trái; đầu nhiều góc, cằm phẳng; áo đỏ san hô #f2433a; khăn vàng mù tạt #ffc93c; viền đen 8 px. Ba màu này chỉ dành cho Remy, nhân vật phụ dùng pastel.
+Bảy nguyên tắc học từ cách người dẫn của video mẫu được thiết kế và diễn, cùng kho tư thế, cỡ khung và cách hóa trang của Remy: xem `art/host.html` (bộ vẽ `art/host.js`). Remy là thiết kế riêng, sắc cạnh: tóc xanh ngọc #12b5ad vuốt chéo ra sau, mái vát che thái dương trái; đầu nhiều góc, cằm phẳng; áo đào nhạt #ffd2b0; túi đưa thư đỏ rượu #7a1e3a đeo chéo bên hông; viền đen 8 px. Bộ màu chuẩn ở art/brand.html. Không làm mặt cằm nhọn hay túi bao tử để khỏi giống nhân vật kênh mẫu.

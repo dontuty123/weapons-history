@@ -19,17 +19,18 @@
 </style>
 <div class="wrap">
 <h1>Kiểu tóc gọn gàng cho Remy</h1>
-<p>Năm kiểu tóc ngắn gọn, phổ biến ở con trai Việt Nam và châu Á. Mỗi hàng: tóc màu hồng mâm xôi (màu nhận diện của kênh), cùng kiểu với tóc đen tự nhiên, và toàn thân. Mặt V mềm, áo cam mơ, túi navy giữ nguyên. Chọn một kiểu và cho mình biết dùng màu hồng hay đen.</p>
+<p><b>Mới:</b> số 1 và 2 là short quiff (hai bên ngắn, mái vuốt dựng ra sau).</p>
+<p>Bảy kiểu tóc ngắn gọn, phổ biến ở con trai Việt Nam và châu Á. Mỗi hàng: tóc màu hồng mâm xôi (màu nhận diện của kênh), cùng kiểu với tóc đen tự nhiên, và toàn thân. Mặt V mềm, áo cam mơ, túi navy giữ nguyên. Chọn một kiểu và cho mình biết dùng màu hồng hay đen.</p>
 <div class="grid" id="g"></div>
 </div>
-<script src="host.js?v=13"></script>
+<script src="host.js?v=16"></script>
 <script>
 const {host, HAIRS} = HOST;
 const box = (inner, vb) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="#fff"/>${inner}</svg>`;
-const keys = ["sidepart","twoblock","crop","comma","buzz"];
+const keys = ["quiff","quiffTex","sidepart","twoblock","crop","comma","buzz"];
 document.getElementById("g").innerHTML = keys.map((k,i) => `<div class="card"><div class="shots">
-  ${box(host({look:"raspberry",hairStyle:k,pose:"lecture",x:0,y:0,s:1}), "-170 -640 340 360")}
-  ${box(host({look:"raspberry",hairStyle:k,hairColor:"#211c22",pose:"relax",face:"deadpan",x:0,y:0,s:1}), "-170 -640 340 360")}
-  ${box(host({look:"raspberry",hairStyle:k,pose:"present",x:0,y:0,s:1}), "-260 -660 520 680")}
+  ${box(host({look:"raspberry",hairStyle:k,pose:"lecture",x:0,y:0,s:1}), "-170 -680 340 400")}
+  ${box(host({look:"raspberry",hairStyle:k,hairColor:"#211c22",pose:"relax",face:"deadpan",x:0,y:0,s:1}), "-170 -680 340 400")}
+  ${box(host({look:"raspberry",hairStyle:k,pose:"present",x:0,y:0,s:1}), "-260 -690 520 710")}
 </div><b>${i+1}. ${HAIRS[k].name} <small>· hồng / đen</small></b></div>`).join("");
 </script>

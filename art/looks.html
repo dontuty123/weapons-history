@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy Looks</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--bg:#f0eee9;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px}
+  p{margin:0 0 16px;color:var(--muted);max-width:72ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+  .card{background:var(--card);border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column}
+  .card[aria-pressed="true"]{border-color:#1b1b1f;box-shadow:0 0 0 3px #1b1b1f}
+  .card:focus-visible{outline:3px solid #14a89f;outline-offset:3px}
+  .shots{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:0;border-bottom:1px solid var(--line)}
+  .shots svg{display:block;width:100%;height:auto}
+  .meta{padding:10px 14px 14px}
+  .meta b{font-size:17px}
+  .sw{display:flex;gap:6px;margin-top:8px}
+  .sw i{width:26px;height:26px;border-radius:6px;border:2px solid #1b1b1f;display:block}
+  .pick{position:sticky;bottom:12px;margin-top:20px;display:inline-block;background:#1b1b1f;color:#fff;border-radius:10px;padding:10px 16px;font-weight:800}
+</style>
+<div class="wrap">
+<h1>Sáu bộ hoàn chỉnh cho Remy</h1>
+<p>Mỗi bộ đã phối sẵn từ đầu đến chân: kiểu tóc, màu tóc, áo, túi đưa thư và nền avatar. Bộ nào cũng theo cùng cấu trúc: tóc là màu rực duy nhất, áo sáng nhạt, túi đậm và tối, nền là bản xỉn của màu tóc. Bấm vào một bộ để chọn, rồi gửi mình dòng mã ở cuối trang.</p>
+<div class="grid" id="g"></div>
+<div class="pick" id="pick">Chưa chọn bộ nào</div>
+</div>
+<script src="host.js?v=6"></script>
+<script>
+const {host, avatar, LOOKS} = HOST;
+const wide = (s, vb) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-2000" y="-2000" width="5000" height="5000" fill="#fff"/>${s}</svg>`;
+let cur = null;
+try { const v = localStorage.getItem("remyLook"); if (LOOKS[v]) cur = v; } catch(e) {}
+const keys = Object.keys(LOOKS);
+document.getElementById("g").innerHTML = keys.map((k,i) => {
+  const L = LOOKS[k];
+  return `<button class="card" data-k="${k}">
+    <div class="shots">
+      <div style="padding:10px">${avatar({look:k,size:180}).replace(/width="180" height="180"/,'width="100%" height="auto"')}</div>
+      ${wide(host({look:k,pose:"present",x:0,y:0,s:1}), "-230 -640 460 680")}
+      ${wide(host({look:k,pose:"lecture",face:"smug",x:0,y:0,s:1}), "-150 -640 300 360")}
+    </div>
+    <div class="meta"><b>Bộ ${i+1}: ${L.name}</b>
+      <div class="sw">${[L.hairC,L.top,L.bag,L.bg].map(c=>`<i style="background:${c}" title="${c}"></i>`).join("")}</div>
+    </div></button>`;
+}).join("");
+function mark(){
+  document.querySelectorAll(".card").forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===cur));
+  document.getElementById("pick").textContent = cur ? `Đã chọn: Bộ ${keys.indexOf(cur)+1} (${LOOKS[cur].name})` : "Chưa chọn bộ nào";
+}
+document.querySelectorAll(".card").forEach(b=>b.onclick=()=>{cur=b.dataset.k;try{localStorage.setItem("remyLook",cur)}catch(e){};mark();});
+mark();
+</script>

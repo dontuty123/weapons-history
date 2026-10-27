@@ -102,8 +102,21 @@
       neck: '<path d="M-40 -320 L40 -320 L0 -270Z" fill="#e33b2f" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
   };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand" } = {}) {
-    const H = HAIRS[hair] || HAIRS.swept, O = OUTFITS[outfit] || OUTFITS.brand;
+  const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="12" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
+  const LOOKS = {
+    teal:    { name: "Xanh ngọc · đào · đỏ rượu", hair: "swept",   hairC: "#14a89f", top: "#ffd2b0", topD: "#f2b48c", bag: "#7a1e3a", flap: "#9b2a4c", bg: "#6e9c98" },
+    indigo:  { name: "Chàm · bạc hà · nâu cháy", hair: "flattop",  hairC: "#3b4cc0", top: "#d6f2e4", topD: "#b4dfc8", bag: "#8a3b12", flap: "#a94e1e", bg: "#7d84b0" },
+    flame:   { name: "Đỏ cam · xanh trời · navy", hair: "blunt",    hairC: "#e8452f", top: "#d3e8ff", topD: "#b1d0f5", bag: "#1e2f5a", flap: "#2c4380", bg: "#c08a6a" },
+    violet:  { name: "Tím · chanh nhạt · xanh rêu", hair: "visor",  hairC: "#7a3fd1", top: "#e6f5b8", topD: "#cfe48f", bag: "#0f4f4f", flap: "#1a6a6a", bg: "#8f80b0" },
+    mustard: { name: "Vàng nghệ · tím nhạt · mận", hair: "topknot", hairC: "#e0a21c", top: "#e6dcff", topD: "#cbbcf2", bag: "#4a1f4f", flap: "#652a6b", bg: "#b9a36a" },
+    cobalt:  { name: "Xanh coban · san hô nhạt · rừng", hair: "swept", hairC: "#2563eb", top: "#ffd0c8", topD: "#f4ada2", bag: "#1f4d3a", flap: "#2b6a50", bg: "#6f7fa0" },
+  };
+  const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, neck: satchel(L.bag, L.flap, L.top) } }; };
+
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null } = {}) {
+    const lo = look ? lookOpts(look) : null;
+    if (lo) hair = lo.hair;
+    const H0 = HAIRS[hair] || HAIRS.swept, H = lo ? { ...H0, c: lo.hairC } : H0, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);
     const p = POSE[pose] || POSE.lecture;
     const body = `
       <path d="M-20 -176 L-26 -26 M20 -176 L28 -26" ${L8}/>
@@ -119,17 +132,18 @@
       ${COSTUME[costume]}`;
     return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})">${body}${scarf}${head}${p.front || ""}</g>`;
   }
-  function avatar({ text = "Trust me,|I read it.", hair = "swept", outfit = "brand", size = 512 } = {}) {
+  function avatar({ text = "Trust me,|I read it.", hair = "swept", outfit = "brand", size = 512, look = null } = {}) {
+    const bg = look ? LOOKS[look].bg : "#6e9c98", uid = "av" + Math.random().toString(36).slice(2, 8);
     const lines = text.split("|");
     return `<svg viewBox="0 0 512 512" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <clipPath id="av"><circle cx="256" cy="256" r="246"/></clipPath>
+      <clipPath id="${uid}"><circle cx="256" cy="256" r="246"/></clipPath>
       <circle cx="256" cy="256" r="250" fill="#1b1b1f"/>
-      <g clip-path="url(#av)"><rect width="512" height="512" fill="#6e9c98"/>
-        ${host({ x: 180, y: 700, s: 0.78, pose: "lecture", face: "lecture", hair, outfit })}
+      <g clip-path="url(#${uid})"><rect width="512" height="512" fill="${bg}"/>
+        ${host({ x: 180, y: 700, s: 0.78, pose: "lecture", face: "lecture", hair, outfit, look })}
         <path d="M270 136 Q270 86 320 86 H436 Q482 86 482 136 V190 Q482 236 436 236 H344 L300 278 L312 236 Q270 234 270 190Z" fill="#ffffff" stroke="#1b1b1f" stroke-width="8" stroke-linejoin="round"/>
         ${lines.map((l, i) => `<text x="376" y="${154 + i * 40 - (lines.length - 2) * 20}" font-family="'Gochi Hand', 'Comic Sans MS', cursive" font-size="36" fill="#1b1b1f" text-anchor="middle">${l}</text>`).join("")}
       </g>
       <circle cx="256" cy="256" r="246" fill="none" stroke="#1b1b1f" stroke-width="10"/></svg>`;
   }
-  g.HOST = { avatar,  host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
+  g.HOST = { LOOKS, avatar,  host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
 })(window);

@@ -5,7 +5,7 @@
   const INK = "#1b1b1f";
   const ln = (w, c = INK) => `stroke="${c}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
   const L8 = ln(8), L6 = ln(6), L5 = ln(5);
-  const C = { skin: "#fde7dc", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
+  const C = { skin: "#fdeee4", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
   const HEAD = "M-94 -540 L84 -556 L100 -470 L96 -372 L56 -320 L-58 -320 L-96 -370 Z";
@@ -76,13 +76,15 @@
   };
 
   const HAIRS = {
-    swept: { name: "Vuốt chéo ra sau", c: "#12b5ad", d: "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z", hi: "M-80 -520 L-40 -566 L30 -578", strands: "M-40 -560 L70 -540 M-20 -520 L90 -520 M-90 -470 L-60 -540" },
+    swept: { name: "Vuốt chéo ra sau", c: "#14a89f", d: "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z", hi: "M-80 -520 L-40 -566 L30 -578", strands: "M-40 -560 L70 -540 M-20 -520 L90 -520 M-90 -470 L-60 -540" },
     flattop: { name: "Đầu đinh vuông", c: "#2b2d6e", d: "M-100 -470 L-102 -582 L96 -598 L104 -480 L84 -498 L70 -484 L52 -500 L30 -486 L8 -502 L-14 -488 L-36 -502 L-58 -486 L-80 -498 Z", hi: "M-80 -572 L70 -584", strands: "M-60 -580 L-62 -510 M-20 -584 L-22 -514 M20 -588 L18 -516 M60 -590 L58 -510", extra: '<path d="M-98 -470 L-96 -420 M100 -480 L98 -430" stroke="#2b2d6e" stroke-width="10" stroke-linecap="round" opacity=".45"/>' },
     blunt: { name: "Mái bằng cắt thẳng", c: "#e8452f", d: "M-108 -380 L-112 -540 L-70 -590 L60 -600 L110 -560 L114 -390 L96 -390 L94 -470 L76 -456 L60 -474 L40 -458 L20 -476 L0 -458 L-20 -474 L-40 -456 L-60 -472 L-80 -456 L-92 -462 L-94 -380 Z", hi: "M-70 -570 L40 -582", strands: "M-104 -500 L-100 -400 M104 -500 L106 -400 M-40 -580 L-46 -480 M20 -584 L16 -482" },
     topknot: { name: "Búi tó trên đỉnh", c: "#1f1a24", d: "M-104 -440 L-108 -540 L-60 -576 L70 -586 L106 -548 L104 -460 L70 -506 L-20 -500 L-70 -470 Z", hi: "M-60 -556 L40 -566", strands: "M-80 -500 L-40 -560 M80 -500 L40 -566 M0 -580 L0 -510", top: '<path d="M-30 -580 L-36 -640 L-4 -666 L30 -650 L34 -588Z" fill="#1f1a24" stroke="#1b1b1f" stroke-width="8" stroke-linejoin="round"/><path d="M-34 -592 H32" stroke="#ffc93c" stroke-width="10"/>' },
     visor: { name: "Mái nhọn chĩa trước", c: "#7a3fd1", d: "M-104 -430 L-106 -540 L-50 -586 L60 -590 L100 -548 L156 -512 L110 -508 L132 -486 L70 -494 L80 -474 L20 -484 L-10 -466 L-40 -478 L-60 -452 Z", hi: "M-40 -566 L60 -568 L110 -530", strands: "M-30 -580 L40 -500 M20 -588 L90 -514 M-70 -556 L-20 -488" },
   };
   const OUTFITS = {
+    brand: { name: "Áo đào nhạt + khăn đỏ rượu (bộ chuẩn)", body: "#ffd2b0", dark: "#f2b48c",
+      neck: '<path d="M-62 -330 L62 -330 L60 -298 L-60 -298Z" fill="#7a1e3a" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-44 -300 L-70 -226 L-46 -222 L-26 -298Z" fill="#7a1e3a" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-36 -296 L-54 -240" stroke="#a83a5a" stroke-width="3" stroke-linecap="round"/>' },
     tee: { name: "Áo thun đỏ + khăn vàng", body: "#f2433a", dark: "#c92e27",
       neck: '<path d="M-62 -330 L62 -330 L60 -298 L-60 -298Z" fill="#ffc93c" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M-44 -300 L-70 -226 L-46 -222 L-26 -298Z" fill="#ffc93c" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
     varsity: { name: "Áo khoác bóng chày", body: "#1e3a8a", dark: "#162c69",
@@ -99,8 +101,8 @@
       neck: '<path d="M-40 -320 L40 -320 L0 -270Z" fill="#e33b2f" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
   };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "tee" } = {}) {
-    const H = HAIRS[hair] || HAIRS.swept, O = OUTFITS[outfit] || OUTFITS.tee;
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand" } = {}) {
+    const H = HAIRS[hair] || HAIRS.swept, O = OUTFITS[outfit] || OUTFITS.brand;
     const p = POSE[pose] || POSE.lecture;
     const body = `
       <path d="M-20 -176 L-26 -26 M20 -176 L28 -26" ${L8}/>
@@ -116,5 +118,17 @@
       ${COSTUME[costume]}`;
     return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})">${body}${scarf}${head}${p.front || ""}</g>`;
   }
-  g.HOST = { host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
+  function avatar({ text = "Trust me,|I read it.", hair = "swept", outfit = "brand", size = 512 } = {}) {
+    const lines = text.split("|");
+    return `<svg viewBox="0 0 512 512" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <clipPath id="av"><circle cx="256" cy="256" r="246"/></clipPath>
+      <circle cx="256" cy="256" r="250" fill="#1b1b1f"/>
+      <g clip-path="url(#av)"><rect width="512" height="512" fill="#6e9c98"/>
+        ${host({ x: 180, y: 700, s: 0.78, pose: "lecture", face: "lecture", hair, outfit })}
+        <path d="M270 136 Q270 86 320 86 H436 Q482 86 482 136 V190 Q482 236 436 236 H344 L300 278 L312 236 Q270 234 270 190Z" fill="#ffffff" stroke="#1b1b1f" stroke-width="8" stroke-linejoin="round"/>
+        ${lines.map((l, i) => `<text x="376" y="${154 + i * 40 - (lines.length - 2) * 20}" font-family="'Gochi Hand', 'Comic Sans MS', cursive" font-size="36" fill="#1b1b1f" text-anchor="middle">${l}</text>`).join("")}
+      </g>
+      <circle cx="256" cy="256" r="246" fill="none" stroke="#1b1b1f" stroke-width="10"/></svg>`;
+  }
+  g.HOST = { avatar,  host, POSE: Object.keys(POSE), EX: Object.keys(EX), C, HAIRS, OUTFITS };
 })(window);

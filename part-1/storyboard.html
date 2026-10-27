@@ -1,0 +1,480 @@
+<title>Weapons That Changed History</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: kịch bản chia chương; mỗi chương là một lưới ô storyboard (hình + lời), có nút chuyển sang chế độ chỉ lời đọc */
+:root{
+  --bg:#f6f4ee; --card:#ffffff; --ink:#22252b; --muted:#6c6f78; --line:#dcd8cc;
+  --accent:#d9572b; --accent-soft:#fbe3d8; --tag:#2a6f73;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17191d; --card:#22252b; --ink:#eceae4; --muted:#a3a6ad; --line:#3a3d44;
+  --accent:#f08a5d; --accent-soft:#3d2a22; --tag:#6fc3c7; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17191d; --card:#22252b; --ink:#eceae4; --muted:#a3a6ad; --line:#3a3d44;
+  --accent:#f08a5d; --accent-soft:#3d2a22; --tag:#6fc3c7; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:end;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:16px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:6px 0 0;max-width:62ch}
+.stats{display:flex;gap:20px;font-variant-numeric:tabular-nums}
+.stats div{display:flex;flex-direction:column}
+.stats b{font-family:var(--display);font-size:24px;line-height:1}
+.stats span{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;align-items:center}
+.bar button{font:inherit;font-weight:700;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.bar button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bar button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.toc a{font-size:13px;color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line)}
+.toc a:hover{color:var(--accent)}
+section{margin-top:40px}
+section h2{font-family:var(--display);font-weight:700;font-size:26px;margin:0 0 4px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+section h2 small{font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:12px}
+.beat{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.beat svg{display:block;width:100%;height:auto;aspect-ratio:16/9;max-width:100%;border-bottom:1px solid var(--line)}
+.beat p{margin:0;padding:10px 12px 4px;font-size:14.5px}
+.beat .meta{padding:0 12px 10px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;font-variant-numeric:tabular-nums}
+.beat .meta em{font-style:normal;color:var(--tag);font-weight:700}
+.plain{display:none;max-width:68ch}
+.plain p{margin:0 0 10px;font-size:16px}
+body.text-only .grid{display:none}
+body.text-only .plain{display:block}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13px;color:var(--muted);margin-top:8px}
+.legend i{font-style:normal;color:var(--tag);font-weight:700}
+@media (prefers-reduced-motion:no-preference){.beat{transition:transform .15s}.beat:hover{transform:translateY(-2px)}}
+</style>
+
+<div class="wrap">
+<header>
+  <div>
+    <h1>Weapons That Changed History · Part 1</h1>
+    <p class="sub">Kịch bản tiếng Anh viết mới, cùng chủ đề và cách kể theo từng câu. Mỗi ô là một cú cắt hình: lời đọc ở dưới, hình minh họa ở trên. Ô có nhãn “ẢNH THẬT” là chỗ chèn ảnh hiện vật hoặc tư liệu thật.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+<div class="bar">
+  <button id="b-board" aria-pressed="true">Storyboard</button>
+  <button id="b-text" aria-pressed="false">Chỉ lời đọc</button>
+</div>
+<div class="legend"><span><i>NGƯỜI DẪN</i> nói ý, nhận xét, câu đùa</span><span><i>CẢNH</i> minh họa tình huống</span><span><i>TV</i> người dẫn bình luận cảnh vừa xem</span><span><i>ẢNH THẬT</i> hiện vật + người dẫn chỉ vào</span><span><i>MỤC LỤC</i> mở chương</span></div>
+<nav class="toc" id="toc"></nav>
+<main id="main"></main>
+</div>
+
+<script>
+// ---------- weapon menu ----------
+const MENU=[["Club","🏏"],["Spear","🔱"],["Bow","🏹"],["Sword","🗡️"],["Chariot","🛞"],["Gladius","⚔️"],["Pilum","🥢"],["Pike","📏"],["Mongol Bow","🐎"],["Longbow","🎯"],["Longsword","🤺"],["Battle Axe","🪓"],["Katana","🎌"],["Siege Engines","🏰"],["Trebuchet","🪨"],["Ballista","🎯"],["Gunpowder","🧨"],["Fire Lance","🔥"],["Matchlock","🔫"],["Bayonet","🔪"],["Cartridge","🔩"],["Gatling Gun","⚙️"],["Shrapnel","💥"]];
+
+// ---------- visual helpers (spec builders) ----------
+const N=(pose,fx)=>({k:"n",pose,fx});            // narrator on white
+const C=(mood,fx)=>({k:"c",mood,fx});            // narrator close-up
+const TV=(screen,pose)=>({k:"tv",screen,pose});  // narrator + TV replay
+const PH=(label,emo)=>({k:"ph",label,emo});      // real photo + narrator pointing
+const MN=i=>({k:"mn",i});                        // chapter menu
+const S=(bg,actors,fx)=>({k:"s",bg,actors,fx});  // scene
+
+// ---------- script ----------
+const CH=[
+{t:"Intro",b:[
+[N("talk",[["🏠",250,70,40]]),"Modern people worry about modern things. Rent."],
+[S("room",[["baby",170,"",0]],[["😮‍💨",210,60,26]]),"Whether the baby's breathing is supposed to sound like that."],
+[C("think"),"Ancient people had all of those worries too. Plus one extra."],
+[S("field",[["cave",95,""],["cave2",225,"",1]],[["❓",95,40,22]]),"\"What if a guy runs over here and hits me?\""],
+[S("field",[["cave",95,"🪵"],["cave2",225,"",1]]),"Their first answer was simple. Pick up a stick."],
+[S("field",[["cave",95,"🪵"],["cave2",225,"📏",1]]),"But what if the other guy finds a longer stick?"],
+[S("field",[["cave",95,"🌲"],["cave2",225,"📏",1]]),"Then you find an even longer one."],
+[S("field",[["cave",70,"🌲"],["cave2",150,"📏",1],["archer",290,"🏹",1]],[["➶",220,70,26]]),"And this goes on until one day, a man stands way, way over there… and shoots an arrow at you."],
+[S("field",[["cave",95,"🌲"]],[["💫",95,40,24],["➹",120,95,22]]),"Game over. Stick length no longer matters."],
+[TV("🏹","talk"),"That's basically the whole history of weapons. Nobody wants to be the one who gets hit first, or hit harder."],
+[MN(-1),"So today we're going through the weapons that changed the world."],
+[N("point"),"Part 1 covers the ancient, medieval and early modern stuff. The modern weapons get their own episode."],
+[N("talk",[["💻",240,110,44]]),"These facts come from many sources, plus a bit of our own opinion."],
+[C("smile"),"If we got something wrong, tell us in the comments. We'll read them. Probably."],
+]},
+{t:"The Club",b:[
+[MN(0),"Number one: the club."],
+[S("field",[["cave",160,"🪵"]]),"If you need a weapon and your hands are empty, a stick is the easiest thing to find. Pick it up, swing it, done. You're armed."],
+[N("point"),"Clubs showed up very early in human history, and people still use them today."],
+[N("smile",[["⚾",250,60,34]]),"For sports. Mostly."],
+[S("plain",[],[["🪵",80,95,46],["➡️",140,95,20],["🔩",195,95,40],["➡️",240,95,20],["🌵",285,95,40]]),"Over time, people started upgrading the club. A metal head here, some nails there, a few spikes. Anything to make it hurt more."],
+[PH("Macuahuitl","🏏"),"The Aztecs made one called the macuahuitl."],
+[C("shrug"),"If you're not sure how to say it, don't worry. Nobody else is either."],
+[PH("Obsidian blades","🔪"),"It's a flat wooden paddle with sharp blades of obsidian, a kind of volcanic glass, set along both edges. So it doesn't just hit you. It cuts you too."],
+[S("field",[["aztec",110,"🏏"]],[["🐴",240,110,54]]),"Spanish soldiers who fought the Aztecs wrote that a single blow could take down a horse."],
+[TV("🐴","think"),"I have questions about who tested that."],
+[C("sad"),"Poor horse."],
+[S("field",[["cave",130,"🪵"],["cave2",200,"🪵",1]],[["💥",165,60,30]]),"But clubs have one big problem. You have to get really close to use one."],
+[S("field",[["cave",130,""],["cave2",200,"🪵",1]],[["🤕",130,40,26]]),"And if the other guy has a club too, there's a good chance you're the one going home with a bump."],
+[MN(0.5),"Which brings us to weapon number two."],
+]},
+{t:"The Spear",b:[
+[MN(1),"The spear."],
+[N("talk",[["🪵",250,90,36]]),"Take a stick. Make it longer. Sharpen one end. Congratulations, you've invented the spear."],
+[S("field",[["cave",90,"🔱"],["cave2",240,"🪵",1]],[["💨",200,90,24]]),"If a guy with a club is trying to get close to you, you just poke him before he arrives. Problem solved, from a safe distance."],
+[PH("Stone, bronze, iron tips","🔱"),"The earliest spears were just sharpened wood. Then people tied stone points to the tips. Then bronze. Then iron."],
+[S("field",[["greek",70,"🔱"],["greek",120,"🔱"],["greek",170,"🔱"],["greek",220,"🔱"],["greek",270,"🔱"]]),"Later, someone had a brilliant idea: what if a lot of people with spears stood really, really close together?"],
+[PH("Philip II of Macedon","👑"),"Philip II of Macedon, Alexander the Great's dad, turned this into a system called the phalanx."],
+[N("wow",[["📏",250,40,60]]),"His soldiers carried a pike called the sarissa, around five to six meters long. That's longer than most living rooms."],
+[S("field",[["greek",110,"🔱"],["greek",160,"🔱"],["greek",210,"🔱"]],[["🦔",270,60,36]]),"From the front, a phalanx looked like a giant angry hedgehog."],
+[S("field",[["greek",80,"🔱"],["greek",130,"🔱"],["cave2",260,"",1]],[["😬",260,40,24]]),"Charging into that was not a great career move."],
+[PH("Alexander the Great","🗺️"),"Alexander used this formation to win battle after battle across half the known world."],
+[N("point"),"But the phalanx had a weakness. It was great at facing forward, and not so great at turning around."],
+[S("field",[["greek",130,"🔱"],["greek",190,"🔱",1],["archer",295,"🏹",1]],[["👋",295,40,22]]),"And if the enemy simply refused to come close… you couldn't chase them forever."],
+[C("smile"),"So naturally, someone decided to fight from very far away."],
+]},
+{t:"The Bow",b:[
+[MN(2),"The bow and arrow."],
+[N("talk",[["🏹",250,80,44]]),"The idea is simple. A bent stick, a string, and a smaller pointy stick. Pull, let go, and your problem is now forty meters away."],
+[PH("Sibudu Cave points","🪨"),"And it's old. Really old. Stone points found in Sibudu Cave in South Africa suggest people were using bows around 64,000 years ago."],
+[S("field",[["cave",90,"🏹"]],[["🦌",250,110,48]]),"You could hunt animals without getting close enough to be stepped on, and fight enemies without getting close enough to be punched."],
+[S("snow",[["hiker",90,""],["hiker",135,""]],[["🧊",250,105,62]]),"In 1991, two hikers in the Alps, near the border of Austria and Italy, found a body frozen in the ice."],
+[TV("🧊","think"),"At first, everyone assumed it was a climber who'd had a recent accident."],
+[N("read"),"It wasn't recent. He was about 5,300 years old."],
+[PH("Ötzi","🧊"),"Scientists named him Ötzi, after the Ötztal Alps where he was found."],
+[S("lab",[["doc",230,"",1]],[["🛏️",120,120,60]]),"For years, people thought he'd simply died of cold."],
+[PH("X-ray, 2001","🩻"),"Then in 2001, an X-ray found a stone arrowhead stuck in his left shoulder. So no, he didn't freeze to death. Someone shot him."],
+[C("shrug"),"Five thousand years later, still an unsolved murder. Nobody's been arrested."],
+[S("field",[["greek",160,"🛡️"]]),"Of course, once arrows were flying everywhere, people started wearing armor."],
+[MN(2.5),"And once people wore armor, you needed something that could get through it, up close. Which brings us to… the sword."],
+]},
+{t:"The Sword",b:[
+[MN(3),"Number four: the sword."],
+[C("smile"),"A sword is basically a very committed knife."],
+[PH("Arslantepe swords","🗡️"),"The oldest swords we know of were found at Arslantepe in Turkey. They're around five thousand years old."],
+[S("field",[["greek",160,"〰️"]],[["😕",160,40,24]]),"Early swords were bronze. Bronze is nice, but make it too long and it bends."],
+[N("shrug"),"So early swords stayed short. More big dagger than legendary blade."],
+[PH("Iron sword","⚔️"),"Then came iron, and later steel. Now swords could be longer, tougher, and much more expensive."],
+[S("field",[["farmer",100,"🪓"],["noble",230,"🗡️",1]],[["💰",260,40,26]]),"And that's the catch. A sword takes a lot of metal and a lot of skill to make. A farmer could afford an axe. A sword said: this guy has money."],
+[N("point"),"One person with a sword is a fighter. But to win wars, you need thousands of them, moving fast."],
+]},
+{t:"The War Chariot",b:[
+[MN(4),"Number five: the war chariot."],
+[S("desert",[["sumer",150,""]],[["🫏",240,110,44],["🛞",165,135,30]]),"About 4,500 years ago, the Sumerians were already riding heavy wagons into battle. Solid wooden wheels, pulled by donkey-like animals."],
+[C("smile"),"Slow, bumpy, and terrifying anyway."],
+[S("desert",[["egypt",120,"🏹"]],[["🐎",240,105,56],["🛞",130,140,32]]),"Then came lighter chariots with spoked wheels, pulled by horses. Much faster. One person drives, another shoots."],
+[PH("Battle of Kadesh, 1274 BC","🛞"),"The Egyptians and the Hittites loved them. At the Battle of Kadesh, in 1274 BC, thousands of chariots crashed into each other."],
+[C("shrug"),"Both sides claimed victory afterwards. Some things never change."],
+[N("point"),"But chariots need flat ground, trained horses and a lot of money. Rome found a cheaper way to win: very well-trained people with very short swords."],
+]},
+{t:"The Gladius",b:[
+[MN(5),"The gladius."],
+[PH("Roman gladius","⚔️"),"The Roman legionary carried the gladius, a short sword about 60 centimeters long. The Romans borrowed the design from fighters in Hispania, today's Spain and Portugal."],
+[S("field",[["roman",90,"🛡️"],["roman",140,"🛡️"],["roman",190,"🛡️"],["roman",240,"🛡️"]]),"Short sounds like a weakness. But Romans fought behind big rectangular shields, side by side, like a wall."],
+[S("field",[["roman",120,"🛡️"],["roman",170,"🛡️"]],[["🗡️",215,100,26]]),"No room to swing a long blade there. A quick stab through the gap is all you need."],
+[C("smile"),"Basically, a shield wall with knives. And it conquered most of the Mediterranean."],
+[N("point"),"But before they got that close, the Romans liked to throw something first."],
+]},
+{t:"The Pilum",b:[
+[MN(6),"The pilum."],
+[PH("Roman pilum","🥢"),"A Roman javelin, roughly two meters long, with a long, thin iron neck."],
+[S("field",[["roman",90,"🥢"],["roman",140,"🥢"]],[["➶",220,60,24],["➶",250,80,24]]),"Every legionary carried them and threw them just before the two sides met."],
+[S("field",[["gaul",220,"🛡️",1]],[["🥢",205,85,30]]),"The clever part: that thin neck could bend or get stuck when it hit a shield."],
+[S("field",[["gaul",220,"",1]],[["🛡️",180,140,30],["😩",220,40,24]]),"Now the enemy has a two-meter stick hanging off their shield. They can't throw it back, and they can't fight properly with it. So they drop the shield."],
+[C("shrug"),"Then the Romans walk up with the gladius. Bad day."],
+[N("talk"),"Rome ruled for centuries. But in the Middle Ages, a very old idea came back: long sticks, and lots of them."],
+]},
+{t:"The Pike",b:[
+[MN(7),"The pike."],
+[N("wow",[["📏",250,40,60]]),"A spear four to six meters long. Sound familiar? It's the phalanx idea again, more than a thousand years later."],
+[S("field",[["swiss",80,"🔱"],["swiss",125,"🔱"],["swiss",170,"🔱"],["swiss",215,"🔱"]]),"In the 1300s and 1400s, Swiss foot soldiers became famous for fighting in tight blocks of pikes."],
+[S("field",[["swiss",90,"🔱"],["swiss",135,"🔱"],["knight",265,"🐴",1]]),"Armored knights on big horses used to rule the battlefield. A block of farmers with very long sticks changed that."],
+[S("field",[["swiss",100,"🔱"]],[["🐴",250,105,56],["🙅",250,40,24]]),"Horses are brave, but they're not stupid. They will not run into a hedge of points."],
+[PH("Papal Swiss Guard","💂"),"Swiss pikemen became so valuable they were hired as mercenaries all over Europe. The Pope's Swiss Guard still exists today."],
+[N("point"),"But a slow block of pikes has a weak spot: something fast, and very far away."],
+]},
+{t:"The Mongol Bow",b:[
+[MN(8),"Number nine: the Mongol bow."],
+[PH("Composite bow","🏹"),"It's a composite bow: wood, horn and animal sinew glued together. Small, but very powerful."],
+[S("steppe",[["mongol",150,"🏹"]],[["🐎",160,125,58]]),"Small mattered, because the Mongols shot from horseback. At a gallop."],
+[PH("Stone of 1225","🪨"),"A stone from 1225 records an archer named Yesüngge hitting a target at about 335 meters."],
+[C("wow"),"That's more than three football fields."],
+[S("steppe",[["mongol",110,"🏹",1],["knight",260,"",1]],[["🐎",120,125,50],["➶",185,70,22]]),"Mongol riders would charge, shoot, and pretend to run away. When the enemy chased them, they turned around in the saddle and shot again."],
+[PH("Mongol Empire map","🗺️"),"With tactics like that, they built the largest connected land empire in history."],
+[N("point"),"Meanwhile, in England, people took a different approach. Forget the horse. Just make the bow huge."],
+]},
+{t:"The English Longbow",b:[
+[MN(9),"The English longbow."],
+[PH("Yew longbow","🏹"),"A single piece of yew wood, about as tall as a man."],
+[N("strain",[["🏹",240,90,56]]),"Pulling one took serious strength, often well over 45 kilograms of force."],
+[N("read"),"Training started young. In 1363, King Edward III ordered men to practice archery on Sundays and holidays instead of playing other games."],
+[PH("Mary Rose skeletons","🦴"),"Skeletons of archers from the warship Mary Rose show bones changed by years of drawing the bow."],
+[S("battle",[["english",70,"🏹"],["english",115,"🏹"],["knight",270,"🐴",1]],[["➶",180,40,20],["➶",205,30,20],["➶",230,45,20]]),"At Crécy in 1346 and Agincourt in 1415, English archers shot down huge numbers of French knights."],
+[TV("🏹","think"),"Picture a sky so full of arrows it goes dark."],
+[N("point"),"So knights added more and more armor. And swords had to change to deal with it."],
+]},
+{t:"The Longsword",b:[
+[MN(10),"The longsword."],
+[PH("European longsword","🗡️"),"A straight, double-edged sword, long enough to hold with two hands."],
+[N("talk",[["💻",250,100,44]]),"Movies make it look heavy and clumsy. Most weighed around 1.1 to 1.8 kilograms. About the same as a laptop."],
+[PH("Fiore dei Liberi, 1409","📜"),"There were real fencing manuals for it. In 1409, an Italian master named Fiore dei Liberi wrote one full of drawings."],
+[S("castle",[["knight",120,"🗡️"],["knight",210,"",1]],[["🎯",190,85,20]]),"Against plate armor, slashing didn't do much. So fighters gripped the blade halfway down and stabbed into the gaps, like a short spear."],
+[S("castle",[["knight",120,"✝️"],["knight",210,"",1]],[["💫",210,40,24]]),"Some even held it by the blade and hit with the handle, like a hammer. That move had a name: the murder stroke."],
+[C("shrug"),"Yes. That's the real name."],
+[N("point"),"But not everyone could afford a fancy sword. Some people just used their tools."],
+]},
+{t:"The Battle Axe",b:[
+[MN(11),"The battle axe."],
+[S("field",[["farmer",160,"🪓"]],[["🪵",230,130,30]]),"Every farm already had an axe. Give it a longer handle and a thinner blade, and it's ready for war."],
+[S("sea",[["viking",160,"🪓"]],[["⛵",260,90,44]]),"The Vikings made it famous. The Dane axe had a handle long enough to swing with both hands."],
+[S("field",[["viking",110,"🪓"],["gaul",220,"🛡️",1]],[["↙️",175,80,22]]),"Some axes had a bearded blade, with a hooked lower edge. Good for pulling down an enemy's shield."],
+[PH("Bayeux Tapestry, 1066","🧵"),"At the Battle of Hastings in 1066, the English king's elite guards, the housecarls, fought with these big axes."],
+[C("smile"),"They still lost. But they looked very cool doing it."],
+[N("point"),"On the other side of the world, a sword was being made with almost religious care."],
+]},
+{t:"The Katana",b:[
+[MN(12),"The katana."],
+[PH("Tamahagane steel","🔥"),"Japanese smiths made it from a steel called tamahagane, folded and hammered again and again."],
+[N("talk",[["🧱",250,90,36]]),"Before heating and cooling the blade, they coated it in clay: thick on the back, thin on the edge."],
+[PH("Hamon line","🗾"),"The result is a hard, sharp edge and a softer, flexible back. That's also what gives it the curve, and the wavy line along the edge called the hamon."],
+[N("point"),"Fun fact: for most of history, samurai mainly fought with bows and spears. The sword was more of a backup weapon."],
+[S("town",[["samurai",160,"🗡️"]],[["😢",160,40,22]]),"But it became the symbol of the samurai. In 1876, Japan banned carrying swords in public, and the samurai era was basically over."],
+[C("think"),"Swords, axes, arrows. All great in an open field. But what if the enemy is behind a giant wall?"],
+]},
+{t:"Battering Rams & Siege Towers",b:[
+[MN(13),"Siege engines."],
+[S("castle",[["roman",90,""],["roman",130,""]],[["🪵",165,120,50],["🚪",270,110,46]]),"Option one: a very big log. Swing it at the gate until the gate gives up. Put a roof over it so nobody can drop rocks on you."],
+[S("castle",[],[["🗼",120,95,90],["🧱",250,110,60]]),"Option two: if the wall is too high to climb, build something taller, put it on wheels, and push it up to the wall."],
+[PH("Helepolis, Rhodes","🗼"),"The most famous tower was the Helepolis, built for the siege of Rhodes around 305 BC. About 40 meters tall, and covered in iron plates."],
+[N("shrug"),"It didn't work. Rhodes held out, and the attackers left the tower behind."],
+[PH("Colossus of Rhodes","🗽"),"According to ancient writers, the people of Rhodes sold off the leftover equipment and used the money to build a giant statue: the Colossus of Rhodes."],
+[C("smile"),"Thank you for your donation."],
+[N("point"),"Of course, you could also skip the tower and just throw things at the wall."],
+]},
+{t:"The Trebuchet",b:[
+[MN(14),"The trebuchet."],
+[S("field",[["roman",80,""],["roman",120,""]],[["🏗️",210,100,64]]),"Early versions were powered by people pulling on ropes. Later, around the 1100s, someone swapped the people for a massive counterweight."],
+[S("castle",[],[["🏗️",80,110,60],["🪨",170,40,28],["🏰",270,110,56]]),"Heavy box goes down, long arm swings up, and a big rock flies over the wall."],
+[PH("Stirling Castle, 1304","🏰"),"In 1304, King Edward I of England had a giant one built at Stirling Castle in Scotland. It was called Warwolf."],
+[TV("🏳️","think"),"The castle tried to surrender before it was finished. Edward said no. He wanted to test it first."],
+[C("shrug"),"He'd paid for it. He was going to use it."],
+[N("point"),"Trebuchets throw big rocks. But sometimes you want something more accurate."],
+]},
+{t:"The Ballista",b:[
+[MN(15),"The ballista."],
+[PH("Roman ballista","🎯"),"Basically, a giant crossbow. The Greeks invented it, and the Romans loved it."],
+[N("talk",[["🧶",250,90,40]]),"Its power came from twisted bundles of rope made from animal sinew or hair. Twist them tight, pull back, let go."],
+[S("field",[["roman",80,""]],[["🎯",150,110,40],["➶",230,90,26]]),"It could launch big bolts or stones with surprising accuracy."],
+[S("town",[["woman",140,"✂️"],["woman",200,"✂️",1]]),"Ancient writers say that during the last siege of Carthage, the women cut off their hair to make ropes for the war machines."],
+[N("point"),"Rome won anyway. But it shows how much these machines mattered."],
+[C("think"),"For thousands of years, every weapon ran on muscle: arms, horses, twisted rope. Then someone in China mixed three powders together."],
+]},
+{t:"Gunpowder",b:[
+[MN(16),"Gunpowder."],
+[PH("Charcoal, sulfur, saltpeter","⚫"),"Charcoal, sulfur and saltpeter. Mix them right, and you get a powder that burns very, very fast."],
+[S("temple",[["alch",120,""]],[["⚗️",220,110,46]]),"It was discovered by Chinese alchemists, probably in the 800s, while they were searching for a potion to live forever."],
+[S("temple",[["alch",120,""]],[["💥",200,80,80]]),"They were looking for eternal life. They found the opposite."],
+[PH("Military book, 1044","📖"),"The earliest written gunpowder recipes appear in a Chinese military book from 1044."],
+[N("point",[["🎆",250,60,40]]),"At first, it went into fire arrows, bombs and fireworks. Then people started putting it inside tubes."],
+]},
+{t:"The Fire Lance",b:[
+[MN(17),"The fire lance."],
+[N("talk",[["🎋",250,90,40]]),"Take a spear. Tie a tube of bamboo or paper to it. Fill the tube with gunpowder."],
+[S("field",[["chinese",100,"🔱"]],[["🔥",180,75,44]]),"Light it, and it shoots out flames for a few seconds, sometimes with bits of metal or pottery mixed in."],
+[S("field",[["chinese",90,"🔱"],["gaul",250,"",1]],[["🔥",165,75,40],["😱",250,40,24]]),"Chinese soldiers used them in the 1100s. Short range, but imagine facing a flamethrower on a stick."],
+[N("point"),"Over time, the tubes were made of metal, and instead of flames, they fired a single ball."],
+[C("smile"),"Congratulations. That's a gun."],
+]},
+{t:"The Matchlock",b:[
+[MN(18),"The matchlock."],
+[PH("Matchlock mechanism","🔫"),"In the 1400s, Europeans built guns with a slow-burning cord called a match. Pull the trigger, the match drops into a small pan of powder, and bang."],
+[S("field",[["musket",160,"🔫"]],[["⏳",240,60,30]]),"Loading took time. Powder, ball, ramrod, aim. A trained soldier might fire two or three times a minute."],
+[S("rain",[["musket",160,"🔫"]],[["😞",160,40,24]]),"And if it rained? The match went out."],
+[N("point"),"Still, anyone could learn to use one in a few weeks. Becoming a good archer took years."],
+[S("town",[["samurai",110,"🔫"],["samurai",170,"🔫"],["samurai",230,"🔫"]]),"Portuguese traders brought guns to Japan in 1543. Within a few decades, Japanese armies were using thousands of them."],
+[PH("Battle of Nagashino, 1575","🔫"),"At the Battle of Nagashino in 1575, Oda Nobunaga's gunners helped crush a famous cavalry army."],
+[C("think"),"But between shots, a musketeer was holding a very expensive stick. So pikemen had to stand nearby to protect him. Until…"],
+]},
+{t:"The Bayonet",b:[
+[MN(19),"The bayonet."],
+[PH("Bayonne, France","📍"),"The name comes from Bayonne, a town in France."],
+[S("field",[["musket",160,"🔪"]]),"The first version, the plug bayonet, was a knife you jammed straight into the muzzle of your gun."],
+[C("shrug"),"Problem: with a knife in the barrel, you can't shoot."],
+[PH("Socket bayonet","🔪"),"So around 1700, the socket bayonet arrived. It fit around the outside of the barrel. Now you could shoot and stab with the same weapon."],
+[S("field",[["musket",100,"🔫"],["swiss",240,"🔱",1]],[["👋",240,40,22]]),"Every musketeer became his own pikeman. Within a few decades, the pike disappeared from European armies."],
+[N("point"),"Guns were everywhere now. But loading them was still slow and messy."],
+]},
+{t:"The Metal Cartridge",b:[
+[MN(20),"The metal cartridge."],
+[S("field",[["musket",160,"📄"]],[["😬",160,40,22]]),"Before, soldiers carried paper packets of powder and a ball. Tear it open with your teeth, pour it in, push it down the barrel."],
+[PH("Brass cartridge","🔩"),"In the 1800s, inventors put the powder, the bullet and the primer together inside one small brass case."],
+[N("talk",[["💧",250,80,34]]),"Waterproof, quick to load, and it went in from the back of the gun instead of the front."],
+[N("point"),"That made repeating rifles possible: several shots in a row without reloading each time."],
+[C("think"),"And once you can feed bullets in fast, someone always asks: how fast?"],
+]},
+{t:"The Gatling Gun",b:[
+[MN(21),"The Gatling gun."],
+[PH("Richard Gatling","🎩"),"In 1861, an American inventor named Richard Gatling designed a gun with several barrels spinning around a center."],
+[S("field",[["musket",110,""]],[["⚙️",180,110,52],["💨",255,100,30]]),"Turn a crank, the barrels rotate, and each one fires in turn. Hundreds of shots a minute."],
+[N("read"),"Gatling later wrote that he hoped a gun this powerful would mean armies needed fewer soldiers, so fewer people would die."],
+[C("sad"),"That… did not go as planned."],
+[PH("Modern minigun","⚙️"),"The same spinning-barrel idea lives on today in the minigun. Now an electric motor does the cranking."],
+]},
+{t:"The Shrapnel Shell",b:[
+[MN(22),"And finally: the shrapnel shell."],
+[PH("Henry Shrapnel","🎖️"),"In 1784, a British officer named Henry Shrapnel had an idea: fill a hollow shell with musket balls and add a timed fuse."],
+[S("battle",[["ww1",120,""],["ww1",175,""],["ww1",230,""]],[["💥",175,30,40],["•",150,60,16],["•",200,58,16]]),"Fire it over the enemy, it bursts in the air, and rains balls down on everyone below."],
+[N("point"),"The British army adopted it in the early 1800s, and his name became an English word."],
+[S("battle",[["ww1",120,"🪖"],["ww1",175,"🪖"],["ww1",230,"🪖"]]),"In World War One, so many soldiers were hit from above that armies brought back metal helmets."],
+[MN(23),"From sticks to shells. Each new weapon was an answer to the one before it."],
+[N("talk",[["✈️",250,60,36]]),"In Part 2, we get into the modern stuff: machine guns, tanks, planes, and things that are much scarier."],
+[C("smile"),"See you then. And maybe put the stick down."],
+]},
+];
+
+// ---------- drawing ----------
+const W=320,H=180;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const emo=(e,x,y,s)=>`<text x="${x}" y="${y}" font-size="${s}" text-anchor="middle" dominant-baseline="central">${esc(e)}</text>`;
+const OL='stroke="#1d1d1f" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"';
+
+// the narrator: round head, teal beanie, orange hoodie (original design)
+function pip(x,y,s,pose){
+  const mouth={talk:'<ellipse cx="0" cy="-14" rx="4" ry="5" fill="#7a2a1a"/>',wow:'<ellipse cx="0" cy="-13" rx="5" ry="7" fill="#7a2a1a"/>',sad:'<path d="M-6 -11 Q0 -17 6 -11" fill="none" '+OL+'/>',strain:'<path d="M-7 -13 h14" '+OL+'/>'}[pose]||'<path d="M-7 -15 Q0 -8 7 -15" fill="none" '+OL+'/>';
+  const eyes=pose==="read"?'<circle cx="-9" cy="-26" r="7" fill="none" '+OL+'/><circle cx="9" cy="-26" r="7" fill="none" '+OL+'/><circle cx="-9" cy="-25" r="2" fill="#1d1d1f"/><circle cx="9" cy="-25" r="2" fill="#1d1d1f"/>'
+    :pose==="strain"?'<path d="M-13 -28 l6 3 l-6 3 M13 -28 l-6 3 l6 3" fill="none" '+OL+'/>'
+    :'<circle cx="-9" cy="-26" r="3.2" fill="#1d1d1f"/><circle cx="9" cy="-26" r="3.2" fill="#1d1d1f"/>';
+  const arms={
+    point:'<path d="M-20 22 l-12 26" fill="none" '+OL+'/><path d="M20 20 l16 -18 l2 -12" fill="none" '+OL+'/>',
+    shrug:'<path d="M-20 22 l-18 -2 l-4 -10 M20 22 l18 -2 l4 -10" fill="none" '+OL+'/>',
+    think:'<path d="M-20 22 l-12 26" fill="none" '+OL+'/><path d="M20 22 l4 -16 l-14 -10" fill="none" '+OL+'/>',
+    wow:'<path d="M-20 18 l-14 -22 M20 18 l14 -22" fill="none" '+OL+'/>',
+    talk:'<path d="M-20 22 l-12 26" fill="none" '+OL+'/><path d="M20 22 l22 8 l6 -6" fill="none" '+OL+'/>',
+    smile:'<path d="M-20 22 l-12 26 M20 22 l12 26" fill="none" '+OL+'/>',
+    sad:'<path d="M-20 22 l-8 28 M20 22 l8 28" fill="none" '+OL+'/>',
+    read:'<rect x="-22" y="20" width="44" height="26" rx="2" fill="#3c6fb0" '+OL+'/>',
+    strain:'<path d="M-20 22 l-22 2 M20 22 l22 2" fill="none" '+OL+'/>'
+  }[pose]||'';
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+   <path d="M-10 62 v26 M10 62 v26" ${OL}/>
+   <rect x="-22" y="8" width="44" height="58" rx="14" fill="#f0913a" ${OL}/>
+   <path d="M-8 12 l8 10 l8 -10" fill="none" ${OL}/>
+   ${arms}
+   <circle cx="0" cy="-22" r="30" fill="#fbe1cf" ${OL}/>
+   <path d="M-30 -30 Q-28 -58 0 -58 Q28 -58 30 -30 Z" fill="#2a8c91" ${OL}/>
+   <rect x="-32" y="-36" width="64" height="9" rx="4" fill="#23767a" ${OL}/>
+   <circle cx="0" cy="-62" r="7" fill="#f5c542" ${OL}/>
+   ${eyes}${mouth}
+   <circle cx="-17" cy="-15" r="4" fill="#f4a3a3" opacity=".6"/><circle cx="17" cy="-15" r="4" fill="#f4a3a3" opacity=".6"/>
+  </g>`;
+}
+
+// side characters
+const T={
+ cave:{sk:"#f2c9a0",bd:"#d9a441",hat:"mess",hc:"#6b3e1f",spots:1},
+ cave2:{sk:"#e8b98c",bd:"#c98e2f",hat:"mess",hc:"#4d2c14",spots:1},
+ archer:{sk:"#f2c9a0",bd:"#5b7f3a",hat:"cap",hc:"#3f5a28"},
+ aztec:{sk:"#b9774a",bd:"#e6d3a3",hat:"feather",hc:"#1d1d1f"},
+ greek:{sk:"#f0c49b",bd:"#c0392b",hat:"helm",hc:"#c9a227"},
+ roman:{sk:"#f0c49b",bd:"#a52a2a",hat:"helm",hc:"#9aa3ad"},
+ gaul:{sk:"#f3d0b0",bd:"#6d8f5a",hat:"hair",hc:"#c47a2c"},
+ farmer:{sk:"#efc39a",bd:"#8a6d4b",hat:"straw",hc:"#e0c068"},
+ noble:{sk:"#f6d6bb",bd:"#6a3fa0",hat:"crown",hc:"#e5b72b"},
+ sumer:{sk:"#c98d5e",bd:"#e8dcc0",hat:"hair",hc:"#1d1d1f"},
+ egypt:{sk:"#c98d5e",bd:"#f3ecd8",hat:"nemes",hc:"#2c5aa0"},
+ swiss:{sk:"#f2c9a0",bd:"#d33",hat:"cap",hc:"#f2f2f2"},
+ knight:{sk:"#c8ced6",bd:"#9aa3ad",hat:"full",hc:"#7d8590"},
+ mongol:{sk:"#e0b07e",bd:"#2e6b8f",hat:"fur",hc:"#8b5a2b"},
+ english:{sk:"#f2c9a0",bd:"#3f6e3a",hat:"cap",hc:"#7a4f2a"},
+ viking:{sk:"#f3d0b0",bd:"#7a5a3a",hat:"helm",hc:"#8a8f96"},
+ samurai:{sk:"#efc39a",bd:"#2b2b3a",hat:"knot",hc:"#1d1d1f"},
+ alch:{sk:"#f0c8a0",bd:"#f4f1e8",hat:"taoist",hc:"#1d1d1f"},
+ chinese:{sk:"#efc39a",bd:"#8a2f2f",hat:"helm",hc:"#55565c"},
+ musket:{sk:"#f2c9a0",bd:"#2f4a7a",hat:"tricorn",hc:"#1d1d1f"},
+ ww1:{sk:"#f0c8a0",bd:"#7a6a45",hat:"brodie",hc:"#5e6a4a"},
+ hiker:{sk:"#f2c9a0",bd:"#c0392b",hat:"beanie",hc:"#c0392b"},
+ doc:{sk:"#f2c9a0",bd:"#ffffff",hat:"hair",hc:"#6b3e1f"},
+ woman:{sk:"#d9a77a",bd:"#9b4f7a",hat:"long",hc:"#2b1a10"},
+ baby:{sk:"#fbe1cf",bd:"#bcd9f0",hat:"none",hc:"#000",small:1},
+};
+function hat(t){
+  const c=t.hc;
+  switch(t.hat){
+    case"mess":return `<path d="M-24 -18 Q-28 -50 0 -50 Q28 -50 24 -18 L18 -30 L10 -24 L0 -32 L-10 -24 L-18 -30 Z" fill="${c}" ${OL}/>`;
+    case"cap":return `<path d="M-22 -26 Q0 -52 22 -26 Z" fill="${c}" ${OL}/><path d="M14 -40 l12 -10" ${OL}/>`;
+    case"feather":return `<rect x="-22" y="-34" width="44" height="8" fill="#2a8c91" ${OL}/><path d="M0 -34 q-4 -20 6 -26 q2 14 -6 26" fill="#3fae5a" ${OL}/>`;
+    case"helm":return `<path d="M-23 -22 Q-24 -50 0 -50 Q24 -50 23 -22 Z" fill="${c}" ${OL}/><path d="M-10 -50 Q0 -64 10 -50" fill="#c0392b" ${OL}/>`;
+    case"hair":return `<path d="M-22 -20 Q-24 -48 0 -48 Q24 -48 22 -20 Q14 -36 0 -36 Q-14 -36 -22 -20Z" fill="${c}" ${OL}/>`;
+    case"long":return `<path d="M-24 10 Q-28 -48 0 -48 Q28 -48 24 10 L16 -20 Q0 -36 -16 -20 Z" fill="${c}" ${OL}/>`;
+    case"straw":return `<ellipse cx="0" cy="-34" rx="32" ry="7" fill="${c}" ${OL}/><path d="M-14 -36 Q0 -54 14 -36" fill="${c}" ${OL}/>`;
+    case"crown":return `<path d="M-16 -36 l0 -14 l8 8 l8 -12 l8 12 l8 -8 l0 14 Z" fill="${c}" ${OL}/>`;
+    case"nemes":return `<path d="M-24 6 L-22 -34 Q0 -50 22 -34 L24 6 L16 -18 L-16 -18 Z" fill="${c}" ${OL}/>`;
+    case"full":return `<path d="M-23 -4 Q-26 -50 0 -50 Q26 -50 23 -4 Z" fill="${c}" ${OL}/><path d="M-14 -22 h28" stroke="#1d1d1f" stroke-width="4"/>`;
+    case"fur":return `<path d="M-24 -26 Q-22 -52 0 -52 Q22 -52 24 -26 Z" fill="${c}" ${OL}/><rect x="-26" y="-30" width="52" height="9" rx="4" fill="#e9dcc3" ${OL}/>`;
+    case"knot":return `<path d="M-22 -24 Q0 -46 22 -24 Z" fill="${c}" ${OL}/><rect x="-4" y="-56" width="8" height="12" rx="3" fill="${c}" ${OL}/>`;
+    case"taoist":return `<path d="M-20 -32 L20 -32 L14 -52 L-14 -52 Z" fill="#1d1d1f" ${OL}/><circle cx="0" cy="-42" r="4" fill="#f4f1e8"/><path d="M-6 0 Q0 20 6 0" fill="#f4f1e8" ${OL}/>`;
+    case"tricorn":return `<path d="M-30 -30 Q0 -20 30 -30 L18 -50 Q0 -42 -18 -50 Z" fill="${c}" ${OL}/>`;
+    case"brodie":return `<ellipse cx="0" cy="-30" rx="32" ry="6" fill="${c}" ${OL}/><path d="M-18 -32 Q0 -54 18 -32" fill="${c}" ${OL}/>`;
+    case"beanie":return `<path d="M-23 -26 Q-22 -54 0 -54 Q22 -54 23 -26 Z" fill="${c}" ${OL}/><circle cx="0" cy="-56" r="5" fill="#fff" ${OL}/>`;
+    default:return "";
+  }
+}
+function fig(type,x,prop,flip,base){
+  const t=T[type]||T.cave, s=t.small?0.6:1, y=base;
+  const spots=t.spots?`<circle cx="-8" cy="28" r="3" fill="#7a4a12"/><circle cx="8" cy="44" r="3" fill="#7a4a12"/><circle cx="6" cy="20" r="2.5" fill="#7a4a12"/>`:"";
+  const doc=type==="doc"?`<path d="M-4 12 v28" stroke="#3c6fb0" stroke-width="3"/>`:"";
+  return `<g transform="translate(${x} ${y}) scale(${flip?-s:s} ${s})">
+   <path d="M-8 54 v22 M8 54 v22" ${OL}/>
+   <rect x="-18" y="6" width="36" height="52" rx="10" fill="${t.bd}" ${OL}/>${spots}${doc}
+   <path d="M18 18 l12 14" ${OL}/>
+   <circle cx="0" cy="-16" r="22" fill="${t.sk}" ${OL}/>
+   ${hat(t)}
+   <circle cx="-7" cy="-16" r="2.6" fill="#1d1d1f"/><circle cx="7" cy="-16" r="2.6" fill="#1d1d1f"/>
+   <path d="M-5 -5 h10" ${OL}/>
+   ${prop?`<g transform="scale(${flip?-1:1} 1)">${emo(prop,flip?-34:34,18,26)}</g>`:""}
+  </g>`;
+}
+const BG={
+ field:`<rect width="320" height="180" fill="#dcefff"/><ellipse cx="70" cy="30" rx="34" ry="11" fill="#fff"/><ellipse cx="240" cy="24" rx="40" ry="12" fill="#fff"/><path d="M0 110 L60 70 L110 100 L170 64 L230 98 L290 72 L320 90 V180 H0Z" fill="#a9c8e6"/><path d="M0 120 Q160 96 320 118 V180 H0Z" fill="#9fd3b6"/>`,
+ plain:`<rect width="320" height="180" fill="#ffffff"/>`,
+ snow:`<rect width="320" height="180" fill="#e6eef5"/><path d="M0 120 L70 50 L120 96 L190 40 L260 100 L320 70 V180 H0Z" fill="#c3d0dc"/><path d="M60 60 L70 50 L80 60 Z M180 50 L190 40 L200 50Z" fill="#fff"/><path d="M0 140 Q160 120 320 140 V180 H0Z" fill="#fafcff"/>`,
+ castle:`<rect width="320" height="180" fill="#e3ecf5"/><rect x="0" y="60" width="320" height="60" fill="#b9b2a6"/><path d="M0 60 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10" fill="#b9b2a6" stroke="#8d867a"/><rect x="0" y="120" width="320" height="60" fill="#a8c79a"/>`,
+ battle:`<rect width="320" height="180" fill="#d8cdb8"/><path d="M40 40 q20 -20 40 0 q20 -10 30 10" fill="none" stroke="#8a8378" stroke-width="10" opacity=".5"/><path d="M220 30 q20 -20 40 0" fill="none" stroke="#8a8378" stroke-width="10" opacity=".5"/><path d="M0 120 Q160 100 320 120 V180 H0Z" fill="#a88f6a"/>`,
+ desert:`<rect width="320" height="180" fill="#fbe9c8"/><circle cx="270" cy="34" r="16" fill="#f6c453"/><path d="M0 120 Q100 96 200 118 T320 112 V180 H0Z" fill="#e8c88d"/>`,
+ steppe:`<rect width="320" height="180" fill="#e2f0fb"/><path d="M0 116 Q160 104 320 116 V180 H0Z" fill="#c9d98c"/>`,
+ sea:`<rect width="320" height="180" fill="#dcefff"/><rect y="120" width="320" height="60" fill="#7fb4d8"/><path d="M0 120 h140 v60 h-140Z" fill="#c9b38a"/>`,
+ lab:`<rect width="320" height="180" fill="#eef1f6"/><rect x="40" y="20" width="60" height="44" fill="#cfe6f7" stroke="#8a95a3" stroke-width="3"/><rect y="130" width="320" height="50" fill="#d6dbe3"/>`,
+ room:`<rect width="320" height="180" fill="#e9f2f2"/><rect x="230" y="20" width="60" height="70" fill="#cfe6f7" stroke="#6f8f99" stroke-width="3"/><rect y="132" width="320" height="48" fill="#cdbfa6"/>`,
+ town:`<rect width="320" height="180" fill="#f1e9dc"/><path d="M20 70 l40 -26 l40 26 Z M200 70 l50 -30 l50 30Z" fill="#7b5a4a"/><rect x="30" y="70" width="60" height="50" fill="#e4d6bf"/><rect x="210" y="70" width="80" height="50" fill="#e4d6bf"/><rect y="120" width="320" height="60" fill="#cdbb9a"/>`,
+ temple:`<rect width="320" height="180" fill="#efe3e6"/><circle cx="160" cy="70" r="46" fill="#d9ecf0" stroke="#9f8d92" stroke-width="4"/><rect y="124" width="320" height="56" fill="#d9cfc6"/>`,
+ rain:`<rect width="320" height="180" fill="#b8c2cc"/><g stroke="#7f8b97" stroke-width="2">${Array.from({length:26},(_,i)=>`<path d="M${(i*13)%320} ${(i*37)%110} l-5 14"/>`).join("")}</g><path d="M0 124 Q160 110 320 124 V180 H0Z" fill="#7f9a7a"/>`,
+};
+function draw(v){
+  let g="";
+  if(v.k==="n"){g=BG.plain+pip(160,82,0.95,v.pose);(v.fx||[]).forEach(f=>g+=emo(...f));}
+  else if(v.k==="c"){const p={think:"think",smile:"smile",shrug:"shrug",wow:"wow",sad:"sad"}[v.mood]||"smile";g=BG.plain+pip(160,150,2.1,p)+(v.mood==="think"?emo("💭",250,40,30):"")+(v.mood==="sad"?emo("💧",200,62,18):"");}
+  else if(v.k==="tv"){g=BG.plain+`<rect x="20" y="118" width="170" height="10" fill="#8a5f45" ${OL}/><path d="M34 128 v44 M176 128 v44" ${OL}/><rect x="38" y="44" width="134" height="72" rx="4" fill="#1d1d1f"/><rect x="44" y="50" width="122" height="60" fill="#dcefff"/><path d="M44 96 Q105 86 166 96 V110 H44Z" fill="#9fd3b6"/><path d="M98 116 v4 h14 v-4" ${OL}/>`+emo(v.screen,105,80,30)+pip(245,92,0.85,v.pose||"talk");}
+  else if(v.k==="ph"){g=BG.plain+`<rect x="16" y="22" width="180" height="118" fill="#e7e2d6" stroke="#9c9586" stroke-width="2"/><g stroke="#d3ccbd" stroke-width="1.5">${Array.from({length:12},(_,i)=>`<path d="M${16+i*16} 140 l40 -118"/>`).join("")}</g>`+emo(v.emo,106,80,52)+`<rect x="22" y="28" width="70" height="16" rx="3" fill="#2a6f73"/><text x="57" y="39.5" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" font-family="Nunito,sans-serif">ẢNH THẬT</text><text x="106" y="158" font-size="12.5" text-anchor="middle" font-family="Baloo 2,sans-serif" fill="#1d1d1f">${esc(v.label)}</text>`+pip(258,88,0.78,"point");}
+  else if(v.k==="mn"){g=BG.plain;const ci=v.i;const start=Math.max(0,Math.min(MENU.length-4,Math.floor(ci<0?0:ci)-1));
+    for(let j=0;j<4;j++){const idx=start+j;if(idx>=MENU.length)break;const [n,e]=MENU[idx];const cx=48+j*75,cur=idx===ci;
+      g+=`<circle cx="${cx}" cy="78" r="${cur?32:26}" fill="${["#bfe8ef","#f9c6b0","#c8c7f3","#f6e3a1","#c9ecc0","#f5c1dd"][idx%6]}" ${OL} ${cur?'stroke-width="4"':''}/>`+emo(e,cx,78,cur?30:24)+`<text x="${cx}" y="128" font-size="12" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="${cur?800:500}" fill="#1d1d1f">${esc(n)}</text>`;}
+    if(ci%1!==0) g+=emo("➡️",290,160,18);}
+  else if(v.k==="s"){g=BG[v.bg]||BG.field;(v.fx||[]).forEach(f=>g+=emo(...f));(v.actors||[]).forEach(a=>g+=fig(a[0],a[1],a[2],a[3],v.bg==="plain"?60:72));}
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="storyboard frame">${g}</svg>`;
+}
+const KIND={n:"NGƯỜI DẪN",c:"NGƯỜI DẪN · CẬN",tv:"TV",ph:"ẢNH THẬT",mn:"MỤC LỤC",s:"CẢNH"};
+
+// ---------- render ----------
+const main=document.getElementById("main"),toc=document.getElementById("toc");
+let words=0,beats=0;
+CH.forEach((ch,ci)=>{
+  const id="ch"+ci;let html="",plain="",secW=0;
+  ch.b.forEach(([v,t],bi)=>{const w=t.split(/\s+/).length;secW+=w;beats++;
+    html+=`<article class="beat">${draw(v)}<p>${esc(t)}</p><div class="meta"><em>${KIND[v.k]}</em><span>~${Math.max(1,Math.round(w/2.6))} s</span></div></article>`;
+    plain+=`<p>${esc(t)}</p>`;});
+  words+=secW;
+  const sec=Math.round(secW/2.6);
+  main.insertAdjacentHTML("beforeend",`<section id="${id}"><h2>${ci?ci+". ":""}${esc(ch.t)} <small>${ch.b.length} cú cắt · ~${Math.floor(sec/60)}:${String(sec%60).padStart(2,"0")}</small></h2><div class="grid">${html}</div><div class="plain">${plain}</div></section>`);
+  toc.insertAdjacentHTML("beforeend",`<a href="#${id}">${ci?ci+". ":""}${esc(ch.t)}</a>`);
+});
+const tot=Math.round(words/2.6);
+document.getElementById("stats").innerHTML=`<div><b>${CH.length-1}</b><span>vũ khí</span></div><div><b>${beats}</b><span>cú cắt</span></div><div><b>${words.toLocaleString("en")}</b><span>từ</span></div><div><b>~${Math.floor(tot/60)}:${String(tot%60).padStart(2,"0")}</b><span>thời lượng</span></div>`;
+const bb=document.getElementById("b-board"),bt=document.getElementById("b-text");
+function mode(text){document.body.classList.toggle("text-only",text);bb.setAttribute("aria-pressed",!text);bt.setAttribute("aria-pressed",text);try{localStorage.setItem("mode",text?"t":"b")}catch(e){}}
+bb.onclick=()=>mode(false);bt.onclick=()=>mode(true);
+try{if(localStorage.getItem("mode")==="t")mode(true)}catch(e){}
+</script>

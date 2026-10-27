@@ -1,0 +1,6 @@
+# video/anh tai ve va ban chep loi goc cua nguoi khac: khong commit
+reference/
+*.mp4
+*.webm
+*.vtt
+*.info.json

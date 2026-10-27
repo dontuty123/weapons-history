@@ -103,13 +103,14 @@
   };
 
   const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="12" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
+  // warm signature hues only: scenes are blue sky and green grass, so the host must sit on the opposite side of the wheel
   const LOOKS = {
-    teal:    { name: "Xanh ngọc · đào · đỏ rượu", hair: "swept",   hairC: "#14a89f", top: "#ffd2b0", topD: "#f2b48c", bag: "#7a1e3a", flap: "#9b2a4c", bg: "#6e9c98" },
-    indigo:  { name: "Chàm · bạc hà · nâu cháy", hair: "flattop",  hairC: "#3b4cc0", top: "#d6f2e4", topD: "#b4dfc8", bag: "#8a3b12", flap: "#a94e1e", bg: "#7d84b0" },
-    flame:   { name: "Đỏ cam · xanh trời · navy", hair: "blunt",    hairC: "#e8452f", top: "#d3e8ff", topD: "#b1d0f5", bag: "#1e2f5a", flap: "#2c4380", bg: "#c08a6a" },
-    violet:  { name: "Tím · chanh nhạt · xanh rêu", hair: "visor",  hairC: "#7a3fd1", top: "#e6f5b8", topD: "#cfe48f", bag: "#0f4f4f", flap: "#1a6a6a", bg: "#8f80b0" },
-    mustard: { name: "Vàng nghệ · tím nhạt · mận", hair: "topknot", hairC: "#e0a21c", top: "#e6dcff", topD: "#cbbcf2", bag: "#4a1f4f", flap: "#652a6b", bg: "#b9a36a" },
-    cobalt:  { name: "Xanh coban · san hô nhạt · rừng", hair: "swept", hairC: "#2563eb", top: "#ffd0c8", topD: "#f4ada2", bag: "#1f4d3a", flap: "#2b6a50", bg: "#6f7fa0" },
+    raspberry: { name: "Hồng mâm xôi · kem · nâu sô-cô-la", hair: "swept", hairC: "#d6336c", top: "#fff3e6", topD: "#f3dcc4", bag: "#4a2618", flap: "#653424", bg: "#b07a8c" },
+    watermelon:{ name: "Hồng dưa hấu · trắng ngà · chàm đậm", hair: "blunt", hairC: "#f0506e", top: "#fff6ee", topD: "#f0e0d2", bag: "#232c5c", flap: "#2f3b78", bg: "#b98089" },
+    coral:     { name: "Đỏ san hô · tím sữa · navy", hair: "visor", hairC: "#f25c54", top: "#efe6ff", topD: "#d9cbf5", bag: "#1f2a4d", flap: "#2b3a68", bg: "#b8847e" },
+    tangerine: { name: "Cam quýt · hồng phấn · đỏ rượu", hair: "swept", hairC: "#ff7a1a", top: "#ffe3ea", topD: "#f5c6d2", bag: "#6b1730", flap: "#8a2240", bg: "#c0906c" },
+    cherry:    { name: "Đỏ anh đào · kem bơ · than chì", hair: "flattop", hairC: "#d7263d", top: "#fff1d9", topD: "#f2dbb4", bag: "#2b2b33", flap: "#3d3d48", bg: "#a9787f" },
+    orchid:    { name: "Hồng tím · đào sữa · nâu cà phê", hair: "topknot", hairC: "#b8329e", top: "#ffe4d2", topD: "#f3c9ad", bag: "#4a2a1c", flap: "#61392a", bg: "#9a7a98" },
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, neck: satchel(L.bag, L.flap, L.top) } }; };
 

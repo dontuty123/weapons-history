@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy Hairstyles</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--bg:#f0eee9;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px} p{margin:0 0 16px;color:var(--muted);max-width:72ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .shots{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line)}
+  .shots svg{display:block;width:100%;height:auto}
+  .card b{display:block;padding:10px 14px;font-size:17px}
+  .card small{font-weight:600;color:var(--muted)}
+  @media (max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Kiểu tóc gọn gàng cho Remy</h1>
+<p>Năm kiểu tóc ngắn gọn, phổ biến ở con trai Việt Nam và châu Á. Mỗi hàng: tóc màu hồng mâm xôi (màu nhận diện của kênh), cùng kiểu với tóc đen tự nhiên, và toàn thân. Mặt V mềm, áo cam mơ, túi navy giữ nguyên. Chọn một kiểu và cho mình biết dùng màu hồng hay đen.</p>
+<div class="grid" id="g"></div>
+</div>
+<script src="host.js?v=13"></script>
+<script>
+const {host, HAIRS} = HOST;
+const box = (inner, vb) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="#fff"/>${inner}</svg>`;
+const keys = ["sidepart","twoblock","crop","comma","buzz"];
+document.getElementById("g").innerHTML = keys.map((k,i) => `<div class="card"><div class="shots">
+  ${box(host({look:"raspberry",hairStyle:k,pose:"lecture",x:0,y:0,s:1}), "-170 -640 340 360")}
+  ${box(host({look:"raspberry",hairStyle:k,hairColor:"#211c22",pose:"relax",face:"deadpan",x:0,y:0,s:1}), "-170 -640 340 360")}
+  ${box(host({look:"raspberry",hairStyle:k,pose:"present",x:0,y:0,s:1}), "-260 -660 520 680")}
+</div><b>${i+1}. ${HAIRS[k].name} <small>· hồng / đen</small></b></div>`).join("");
+</script>

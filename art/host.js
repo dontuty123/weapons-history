@@ -83,6 +83,11 @@
   };
 
   const HAIRS = {
+    sidepart: { name: "Rẽ ngôi 7/3", c: "#d6336c", d: "M-100 -462 C-112 -540 -70 -586 -10 -590 C60 -594 110 -556 104 -470 C92 -494 62 -510 22 -510 C2 -528 -28 -534 -44 -520 C-62 -506 -86 -494 -100 -462 Z", hi: "M-10 -566 C30 -572 66 -560 86 -536", strands: "M-44 -520 C-50 -550 -40 -576 -20 -588 M-14 -540 C24 -556 62 -548 88 -518" },
+    twoblock: { name: "Two-block (mái dài, hai bên ngắn)", c: "#d6336c", d: "M-94 -470 C-102 -540 -68 -588 -6 -592 C62 -596 104 -552 100 -472 C92 -482 80 -488 66 -484 L52 -476 L36 -488 L18 -476 L0 -490 L-18 -476 L-36 -488 L-52 -476 L-68 -486 C-80 -488 -90 -482 -94 -470 Z", hi: "M-50 -566 C-10 -580 40 -578 70 -560", strands: "M-40 -560 C-30 -530 -24 -500 -26 -484 M10 -574 C16 -540 18 -510 16 -480 M56 -560 C56 -530 52 -500 50 -480", extra: '<path d="M-96 -462 L-94 -404 M100 -464 L100 -408" stroke="#1b1b1f" stroke-opacity=".35" stroke-width="12" stroke-linecap="round"/>' },
+    crop: { name: "Đầu ngắn mái lởm chởm nhẹ", c: "#d6336c", d: "M-98 -470 C-104 -540 -66 -582 0 -586 C66 -590 104 -546 100 -474 L88 -490 L74 -482 L62 -498 L46 -488 L30 -502 L14 -490 L-2 -504 L-18 -490 L-34 -502 L-50 -488 L-66 -500 L-82 -486 Z", hi: "M-40 -562 C0 -574 40 -572 70 -556", strands: "M-30 -560 L-26 -510 M10 -570 L12 -514 M50 -560 L46 -512" },
+    comma: { name: "Mái dấu phẩy", c: "#d6336c", d: "M-100 -456 C-110 -540 -66 -588 0 -590 C66 -592 108 -546 102 -458 C96 -482 80 -494 62 -490 C72 -478 66 -464 52 -462 C56 -482 42 -498 16 -504 C4 -508 -4 -508 -16 -504 C-42 -498 -56 -482 -52 -462 C-66 -464 -72 -478 -62 -490 C-80 -494 -96 -482 -100 -456 Z", hi: "M-50 -560 C-10 -576 40 -574 74 -552", strands: "M0 -586 C-4 -560 -6 -530 -2 -508 M-40 -570 C-50 -540 -56 -512 -54 -490 M40 -572 C50 -544 56 -514 56 -492" },
+    buzz: { name: "Đầu cua gọn", c: "#d6336c", d: "M-96 -478 C-100 -548 -64 -584 0 -586 C64 -588 102 -552 98 -482 C80 -500 40 -510 0 -510 C-40 -510 -78 -502 -96 -478 Z", hi: "M-40 -566 C0 -576 40 -574 66 -560", strands: "M-60 -540 l4 -8 M-30 -556 l4 -8 M0 -562 l4 -8 M30 -558 l4 -8 M60 -544 l4 -8 M-46 -520 l4 -8 M-14 -530 l4 -8 M18 -530 l4 -8 M50 -522 l4 -8" },
     wave: { name: "Mái sóng hất ngang", c: "#d6336c", d: "M-104 -426 C-122 -480 -112 -544 -62 -576 C-10 -608 72 -600 106 -558 C124 -534 126 -496 114 -466 C106 -484 94 -494 80 -496 C84 -486 78 -472 62 -464 C58 -480 46 -494 26 -498 C24 -480 12 -466 -10 -458 C-10 -476 -22 -488 -42 -490 C-48 -462 -68 -440 -104 -426 Z", hi: "M-70 -540 C-40 -572 10 -580 50 -566", top: '<path d="M6 -598 C14 -642 58 -656 80 -634 C56 -636 36 -622 30 -598Z" fill="HAIRC" stroke="#1b1b1f" stroke-width="7" stroke-linejoin="round"/>', strands: "M-60 -548 C-30 -520 -20 -500 -24 -488 M30 -580 C60 -560 74 -530 72 -508" },
     swept: { name: "Vuốt chéo ra sau", c: "#14a89f", d: "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z", hi: "M-80 -520 L-40 -566 L30 -578", strands: "M-40 -560 L70 -540 M-20 -520 L90 -520 M-90 -470 L-60 -540" },
     flattop: { name: "Đầu đinh vuông", c: "#2b2d6e", d: "M-100 -470 L-102 -582 L96 -598 L104 -480 L84 -498 L70 -484 L52 -500 L30 -486 L8 -502 L-14 -488 L-36 -502 L-58 -486 L-80 -498 Z", hi: "M-80 -572 L70 -584", strands: "M-60 -580 L-62 -510 M-20 -584 L-22 -514 M20 -588 L18 -516 M60 -590 L58 -510", extra: '<path d="M-98 -470 L-96 -420 M100 -480 L98 -430" stroke="#2b2d6e" stroke-width="10" stroke-linecap="round" opacity=".45"/>' },
@@ -122,11 +127,12 @@
   };
   const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, detail: '<path d="M-26 -308 Q0 -290 26 -308" fill="none" stroke="#1b1b1f" stroke-width="5" stroke-linecap="round"/>', neck: satchel(L.bag, L.flap, L.top) } }; };
 
-  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "mochi" } = {}) {
+  function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null, headShape = "mochi", hairStyle = null, hairColor = null } = {}) {
     const HO = HEADS[headShape] || HEADS.mochi, HD = HO.d;
     const lo = look ? lookOpts(look) : null;
     if (lo) hair = lo.hair;
-    const H0 = HAIRS[hair] || HAIRS.swept, H = lo ? { ...H0, c: lo.hairC } : H0, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);
+    if (hairStyle) hair = hairStyle;
+    const H0 = HAIRS[hair] || HAIRS.swept, H = { ...H0, c: hairColor || (lo ? lo.hairC : H0.c) }, O = lo ? lo.outfitObj : (OUTFITS[outfit] || OUTFITS.brand);
     const p = POSE[pose] || POSE.lecture;
     const body = `
       <path d="M-20 -176 L-26 -26 M20 -176 L28 -26" ${L8}/>

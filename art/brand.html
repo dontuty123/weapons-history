@@ -32,25 +32,25 @@
 <h2>Cấu trúc phối màu</h2>
 <div class="tbl"><table>
 <tr><th>Vai trò</th><th>Nhân vật mẫu (đo được)</th><th>Remy</th><th>Lý do hợp</th></tr>
-<tr><td>Màu nhận diện (tóc)</td><td><span class="sw" style="background:#d06080"></span><code>#d06080</code> hồng</td><td><span class="sw" style="background:#14a89f"></span><code>#14a89f</code> xanh ngọc</td><td>Màu rực duy nhất, độ sáng vừa, mắt nhìn vào trước</td></tr>
-<tr><td>Trang phục</td><td><span class="sw" style="background:#ffd080"></span><code>#ffd080</code> vàng bơ nhạt</td><td><span class="sw" style="background:#ffd2b0"></span><code>#ffd2b0</code> đào nhạt</td><td>Sáng, ít rực. Đào là màu đối của xanh ngọc nên cặp này ăn nhau mà không chói</td></tr>
-<tr><td>Điểm nhấn nhỏ</td><td><span class="sw" style="background:#3c306c"></span>tím than (túi)</td><td><span class="sw" style="background:#7a1e3a"></span><code>#7a1e3a</code> đỏ rượu (túi đưa thư)</td><td>Mảng nhỏ, tối, tạo tương phản và giữ hình</td></tr>
-<tr><td>Nền avatar</td><td><span class="sw" style="background:#b08080"></span><code>#b08080</code> hồng xỉn</td><td><span class="sw" style="background:#6e9c98"></span><code>#6e9c98</code> xanh ngọc xỉn</td><td>Bản xỉn và tối hơn của màu nhận diện: đồng bộ mà nhân vật vẫn nổi</td></tr>
+<tr><td>Màu nhận diện (tóc)</td><td><span class="sw" style="background:#d06080"></span><code>#d06080</code> hồng</td><td><span class="sw" style="background:#d6336c"></span><code>#d6336c</code> hồng mâm xôi</td><td>Màu rực duy nhất, độ sáng vừa, mắt nhìn vào trước</td></tr>
+<tr><td>Trang phục</td><td><span class="sw" style="background:#ffd080"></span><code>#ffd080</code> vàng bơ nhạt</td><td><span class="sw" style="background:#ffa95e"></span><code>#ffa95e</code> cam mơ</td><td>Tươi nhưng sáng hơn tóc một bậc, cùng họ màu ấm với tóc nên hài hòa; nổi rõ trên trời xanh và cỏ xanh</td></tr>
+<tr><td>Điểm nhấn nhỏ</td><td><span class="sw" style="background:#3c306c"></span>tím than (túi)</td><td><span class="sw" style="background:#1f2a5c"></span><code>#1f2a5c</code> navy (túi đưa thư)</td><td>Mảng nhỏ, tối, tạo tương phản và giữ hình</td></tr>
+<tr><td>Nền avatar</td><td><span class="sw" style="background:#b08080"></span><code>#b08080</code> hồng xỉn</td><td><span class="sw" style="background:#b0607e"></span><code>#b0607e</code> hồng mâm xôi trầm</td><td>Bản xỉn và tối hơn của màu nhận diện: đồng bộ mà nhân vật vẫn nổi</td></tr>
 <tr><td>Da</td><td><span class="sw" style="background:#fff0e0"></span><code>#fff0e0</code></td><td><span class="sw" style="background:#fdeee4"></span><code>#fdeee4</code></td><td>Sáng nhất, hơi ấm</td></tr>
 <tr><td>Viền</td><td><span class="sw" style="background:#1b1b1f"></span>đen</td><td><span class="sw" style="background:#1b1b1f"></span><code>#1b1b1f</code></td><td>Dày, đều; khung 720 px dùng 8 px</td></tr>
 </table></div>
-<p style="margin-top:12px">Ba tầng độ sáng: <b>sáng</b> (da, áo) · <b>vừa</b> (tóc, nền) · <b>tối</b> (điểm nhấn, viền). Nhân vật phụ và cảnh dùng màu pastel dịu, không dùng xanh ngọc rực, để Remy luôn là điểm nổi nhất.</p>
+<p style="margin-top:12px">Ba tầng độ sáng: <b>sáng</b> (da, áo) · <b>vừa</b> (tóc, nền) · <b>tối</b> (điểm nhấn, viền). Nhân vật phụ và cảnh dùng màu pastel dịu, không dùng hồng mâm xôi hay cam mơ, để Remy luôn là điểm nổi nhất.</p>
 <h2>Remy trong khung hình</h2>
 <div class="grid" id="poses"></div>
 </div>
-<script src="host.js?v=8"></script>
+<script src="host.js?v=9"></script>
 <script>
 const {host, avatar} = HOST;
-document.getElementById("avatar").innerHTML = avatar({size:300});
+document.getElementById("avatar").innerHTML = avatar({size:300,look:"raspberry"});
 const fr = s => `<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg"><rect width="1280" height="720" fill="#fff"/>${s}</svg>`;
 const photo = `<rect x="110" y="70" width="560" height="460" fill="#e8e3d6"/><text x="390" y="310" font-family="Nunito" font-size="28" fill="#857d6b" text-anchor="middle">ảnh hiện vật thật</text>`;
 document.getElementById("poses").innerHTML =
-  fr(host({pose:"lecture",x:640,y:705,s:1.05})) +
-  fr(photo + host({pose:"present",x:990,y:820,s:1.1,flip:true})) +
-  fr(host({pose:"shrug",x:640,y:1390,s:2.1,face:"deadpan"}));
+  fr(host({look:"raspberry",pose:"lecture",x:640,y:705,s:1.05})) +
+  fr(photo + host({look:"raspberry",pose:"present",x:990,y:820,s:1.1,flip:true})) +
+  fr(host({look:"raspberry",pose:"shrug",x:640,y:1390,s:2.1,face:"deadpan"}));
 </script>

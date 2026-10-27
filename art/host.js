@@ -8,7 +8,7 @@
   const C = { skin: "#fdeee4", hair: "#12b5ad", hairDark: "#0b8a84", hairHi: "#6fe0d8", shirt: "#f2433a", shirtDark: "#c92e27", scarf: "#ffc93c", scarfDark: "#d9a21c", shoe: "#1b1b1f", sole: "#ffffff", mouth: "#c0303a", blush: "#f7a9a0" };
 
   // head: tall rounded slab, flat-ish jaw (original silhouette)
-  const HEAD = "M-92 -496 C-94 -546 -60 -568 -8 -570 C50 -572 94 -552 98 -498 L100 -414 C100 -374 86 -352 62 -334 Q22 -314 -20 -318 Q-64 -322 -84 -350 C-94 -366 -94 -392 -94 -414 Z";
+  const HEAD = "M-92 -496 C-94 -546 -60 -568 -8 -570 C50 -572 94 -552 98 -498 L100 -432 C100 -404 92 -386 74 -366 L20 -318 Q0 -306 -20 -318 L-72 -366 C-90 -386 -94 -404 -94 -432 Z";
   // hair: one solid teal block with a swoop fringe falling to the viewer's left
   const HAIR = "M-104 -392 L-112 -520 L-74 -578 L6 -598 L84 -584 L134 -606 L114 -552 L136 -526 L102 -508 L100 -470 L62 -500 L14 -488 L-34 -474 L-64 -436 Z";
 
@@ -103,17 +103,17 @@
       neck: '<path d="M-40 -320 L40 -320 L0 -270Z" fill="#e33b2f" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/>' },
   };
 
-  const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="22" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="12" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
+  const satchel = (bag, flap, buckle) => '<path d="M-44 -316 L70 -200" stroke="#1b1b1f" stroke-width="28" stroke-linecap="round"/><path d="M-44 -316 L70 -200" stroke="' + bag + '" stroke-width="17" stroke-linecap="round"/><path d="M40 -222 L118 -222 L122 -150 L36 -150Z" fill="' + bag + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><path d="M38 -222 L120 -222 L118 -182 L40 -182Z" fill="' + flap + '" stroke="#1b1b1f" stroke-width="6" stroke-linejoin="round"/><rect x="70" y="-190" width="20" height="18" rx="3" fill="' + buckle + '" stroke="#1b1b1f" stroke-width="4"/>';
   // warm signature hues only: scenes are blue sky and green grass, so the host must sit on the opposite side of the wheel
   const LOOKS = {
-    raspberry: { name: "Hồng mâm xôi · kem · nâu sô-cô-la", hair: "wave", hairC: "#d6336c", top: "#fff3e6", topD: "#f3dcc4", bag: "#4a2618", flap: "#653424", bg: "#b07a8c" },
+    raspberry: { name: "Hồng mâm xôi · cam mơ · navy (bộ chuẩn)", hair: "wave", hairC: "#d6336c", top: "#ffa95e", topD: "#ef8a3a", bag: "#1f2a5c", flap: "#2e3d80", bg: "#b0607e" },
     watermelon:{ name: "Hồng dưa hấu · trắng ngà · chàm đậm", hair: "wave", hairC: "#f0506e", top: "#fff6ee", topD: "#f0e0d2", bag: "#232c5c", flap: "#2f3b78", bg: "#b98089" },
     coral:     { name: "Đỏ san hô · tím sữa · navy", hair: "wave", hairC: "#f25c54", top: "#efe6ff", topD: "#d9cbf5", bag: "#1f2a4d", flap: "#2b3a68", bg: "#b8847e" },
     tangerine: { name: "Cam quýt · hồng phấn · đỏ rượu", hair: "wave", hairC: "#ff7a1a", top: "#ffe3ea", topD: "#f5c6d2", bag: "#6b1730", flap: "#8a2240", bg: "#c0906c" },
     cherry:    { name: "Đỏ anh đào · kem bơ · than chì", hair: "wave", hairC: "#d7263d", top: "#fff1d9", topD: "#f2dbb4", bag: "#2b2b33", flap: "#3d3d48", bg: "#a9787f" },
     orchid:    { name: "Hồng tím · đào sữa · nâu cà phê", hair: "wave", hairC: "#b8329e", top: "#ffe4d2", topD: "#f3c9ad", bag: "#4a2a1c", flap: "#61392a", bg: "#9a7a98" },
   };
-  const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, neck: satchel(L.bag, L.flap, L.top) } }; };
+  const lookOpts = k => { const L = LOOKS[k]; return L && { hair: L.hair, hairC: L.hairC, outfitObj: { body: L.top, dark: L.topD, detail: '<path d="M-26 -308 Q0 -290 26 -308" fill="none" stroke="#1b1b1f" stroke-width="5" stroke-linecap="round"/>', neck: satchel(L.bag, L.flap, L.top) } }; };
 
   function host({ x = 640, y = 690, s = 1, pose = "lecture", face: fname, costume = "none", flip = false, hair = "swept", outfit = "brand", look = null } = {}) {
     const lo = look ? lookOpts(look) : null;

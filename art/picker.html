@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy Picker</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--bg:#efede7;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7;--on:#1b1b1f}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:26px;margin:0 0 4px}
+  p{margin:0 0 12px;color:var(--muted);max-width:70ch}
+  h2{font-size:18px;margin:22px 0 8px}
+  .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+  .opt{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:center;overflow:hidden}
+  .opt[aria-pressed="true"]{border-color:var(--on);box-shadow:0 0 0 2px var(--on)}
+  .opt:focus-visible{outline:3px solid #12b5ad;outline-offset:2px}
+  .opt svg{display:block;width:100%;height:auto;aspect-ratio:1/1}
+  .opt span{display:block;padding:6px 8px 8px;font-size:14px;font-weight:700}
+  .preview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .preview svg{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:10px}
+  .code{display:inline-block;margin-top:10px;background:#1b1b1f;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800}
+  @media (max-width:700px){.preview{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Chọn tóc và trang phục cho Remy</h1>
+<p>Bấm một kiểu tóc và một bộ trang phục, phần xem trước bên dưới đổi theo. Đầu sắc cạnh và viền đen giữ nguyên. Chọn xong, gửi mình dòng mã màu đen ở cuối trang.</p>
+<h2>Xem trước</h2>
+<div class="preview" id="pv"></div>
+<div class="code" id="code"></div>
+<h2>Kiểu tóc</h2>
+<div class="opts" id="hairs"></div>
+<h2>Trang phục</h2>
+<div class="opts" id="outfits"></div>
+</div>
+<script src="host.js"></script>
+<script>
+const {host, HAIRS, OUTFITS} = HOST;
+let st = {hair:"swept", outfit:"tee"};
+try { const v = JSON.parse(localStorage.getItem("remy")||"null"); if (v && HAIRS[v.hair] && OUTFITS[v.outfit]) st = v; } catch(e) {}
+const wide = s => `<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg"><rect width="1280" height="720" fill="#fff"/>${s}</svg>`;
+const sq = s => `<svg viewBox="140 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><rect x="140" width="1000" height="1000" fill="#fff"/>${s}</svg>`;
+function render(){
+  document.getElementById("pv").innerHTML =
+    wide(host({...st,pose:"lecture",x:640,y:705,s:1.05})) +
+    wide(host({...st,pose:"present",x:640,y:705,s:1.05})) +
+    wide(host({...st,pose:"shrug",x:640,y:1390,s:2.1,face:"deadpan"}));
+  const ki = Object.keys(HAIRS).indexOf(st.hair)+1, ko = Object.keys(OUTFITS).indexOf(st.outfit)+1;
+  document.getElementById("code").textContent = `Tóc ${ki} (${HAIRS[st.hair].name}) + Áo ${ko} (${OUTFITS[st.outfit].name})`;
+  document.querySelectorAll("[data-hair]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.hair===st.hair));
+  document.querySelectorAll("[data-outfit]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.outfit===st.outfit));
+  try { localStorage.setItem("remy", JSON.stringify(st)); } catch(e) {}
+}
+document.getElementById("hairs").innerHTML = Object.entries(HAIRS).map(([k,h],i)=>
+  `<button class="opt" data-hair="${k}">${sq(host({hair:k,outfit:st.outfit,pose:"lecture",face:"neutral",x:640,y:1120,s:1.55}))}<span>${i+1}. ${h.name}</span></button>`).join("");
+document.getElementById("outfits").innerHTML = Object.entries(OUTFITS).map(([k,o],i)=>
+  `<button class="opt" data-outfit="${k}">${sq(host({hair:st.hair,outfit:k,pose:"present",face:"neutral",x:640,y:900,s:1.4}))}<span>${i+1}. ${o.name}</span></button>`).join("");
+document.querySelectorAll("[data-hair]").forEach(b=>b.onclick=()=>{st.hair=b.dataset.hair;render();});
+document.querySelectorAll("[data-outfit]").forEach(b=>b.onclick=()=>{st.outfit=b.dataset.outfit;render();});
+render();
+</script>

@@ -19,15 +19,15 @@
 </style>
 <div class="wrap">
 <h1>Kiểu tóc gọn gàng cho Remy</h1>
-<p><b>Mới:</b> nhóm "Thêm 10 kiểu" ở cuối trang (từ số 12 đến 21).</p>
-<p>Hai mươi mốt kiểu tóc, phổ biến ở con trai Việt Nam, Hàn Quốc và châu Á. Mỗi hàng: tóc màu hồng mâm xôi (màu nhận diện của kênh), cùng kiểu với tóc đen tự nhiên, và toàn thân. Mặt V mềm, áo cam mơ, túi navy giữ nguyên. Chọn một kiểu và cho mình biết dùng màu hồng hay đen.</p>
+<p><b>Mới:</b> nhóm "Theo nguyên tắc học được" ở cuối trang (số 22 đến 31): khối màu đặc, không đối xứng, một mép cắt sắc cạnh vài đường cong mềm, ít chi tiết. Không làm hàng gai dựng trên đỉnh.</p>
+<p>Ba mươi mốt kiểu tóc, phổ biến ở con trai Việt Nam, Hàn Quốc và châu Á. Mỗi hàng: tóc màu hồng mâm xôi (màu nhận diện của kênh), cùng kiểu với tóc đen tự nhiên, và toàn thân. Mặt V mềm, áo cam mơ, túi navy giữ nguyên. Chọn một kiểu và cho mình biết dùng màu hồng hay đen.</p>
 <div class="grid" id="g"></div>
 </div>
-<script src="host.js?v=18"></script>
+<script src="host.js?v=19"></script>
 <script>
 const {host, HAIRS} = HOST;
 const box = (inner, vb) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="#fff"/>${inner}</svg>`;
-const groups = [["Kiểu Hàn Quốc", ["dandy","curtain","perm","slick","comma","twoblock"]], ["Kiểu khác", ["quiff","quiffTex","sidepart","crop","buzz"]], ["Thêm 10 kiểu", ["wolf","mullet","eboy","french","ivy","messy","curly","sweptlong","mushroom","crew"]]];
+const groups = [["Kiểu Hàn Quốc", ["dandy","curtain","perm","slick","comma","twoblock"]], ["Kiểu khác", ["quiff","quiffTex","sidepart","crop","buzz"]], ["Thêm 10 kiểu", ["wolf","mullet","eboy","french","ivy","messy","curly","sweptlong","mushroom","crew"]], ["Theo nguyên tắc học được (thiết kế riêng)", ["blade","hook","wedge","fin","flick","tiers","sideshave","bob","curltip","zigzag"]]];
 let n = 0;
 document.getElementById("g").innerHTML = groups.map(([title, ks]) => `<h2 style="grid-column:1/-1;font-size:20px;margin:14px 0 0">${title}</h2>` + ks.map(k => { const i = n++; return card(k, i); }).join("")).join("");
 function card(k, i) { return `<div class="card"><div class="shots">

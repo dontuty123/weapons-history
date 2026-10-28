@@ -1,5 +1,6 @@
 // Builds art/remy2-art.js from the user's edited image (art/src/remy2-photoshop.png).
 // Keeps the hand-drawn head, hair and shirt; drops eyes, mouth, arms and legs so remy2.js can redraw them per pose.
+// Approved by the user 2026-10-28: the "soft natural tufts" hair below. Keep it; do not go back to tall spikes.
 // Run: NODE_PATH=<folder with potrace + pngjs> node art/tools/remy2-trace.js
 const { PNG } = require("pngjs"), fs = require("fs"), path = require("path"), potrace = require("potrace");
 const SRC = path.join(__dirname, "../src/remy2-photoshop.png"), OUT = path.join(__dirname, "../remy2-art.js");

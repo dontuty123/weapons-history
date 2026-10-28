@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remy 2 Set</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Gochi+Hand&display=swap">
+<style>
+  :root{--bg:#f0eee9;--card:#fff;--ink:#1f2025;--muted:#5c5e66;--line:#e2dfd7}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1{font-size:28px;margin:0 0 4px} h2{font-size:20px;margin:26px 0 10px} p{margin:0 0 14px;color:var(--muted);max-width:72ch}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .card img,.card svg{display:block;width:100%;height:auto}
+  .card b{display:block;padding:8px 12px;font-size:15px}
+</style>
+<div class="wrap">
+<h1>Remy 2: bộ nhân vật theo ảnh bạn photoshop</h1>
+<p>Đầu, tóc và thân áo lấy nét thẳng từ ảnh của bạn, giữ nguyên nét tay vẽ. Mắt, miệng, tay, chân do code vẽ, nên đổi được biểu cảm và tư thế. Đây là bộ riêng; nhân vật cũ trên các trang khác giữ nguyên.</p>
+<p>So với ảnh gốc: tóc vẽ lại với mái vuốt cao ra trước và một lọn rủ xuống trán, màu hồng rượu đậm hơn; áo đổi sang áo cam mơ viền cổ và gấu màu đỏ rượu, túi đeo chéo màu mận có sọc hồng.</p>
+<h2>Ảnh gốc và bản mới</h2>
+<div class="grid g2" id="hero"></div>
+<h2>Biểu cảm</h2>
+<div class="grid g4" id="faces"></div>
+<h2>Tư thế</h2>
+<div class="grid g4" id="poses"></div>
+</div>
+<script src="remy2-art.js?v=2"></script>
+<script src="remy2.js?v=2"></script>
+<script>
+const { remy, avatar, LOOKS, EX, POSE } = REMY2;
+const svg = (inner, vb, bg) => `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><rect x="-3000" y="-3000" width="6000" height="6000" fill="${bg}"/>${inner}</svg>`;
+const card = (body, label) => `<div class="card">${body}<b>${label}</b></div>`;
+document.getElementById("hero").innerHTML =
+  card(`<img src="src/remy2-photoshop.png" alt="Ảnh gốc bạn photoshop">`, "Ảnh gốc của bạn") +
+  card(avatar({ look: "original" }), "Tóc mới, màu gốc") +
+  card(avatar({ look: "wine" }), "Bản mới: tóc và áo mới");
+document.getElementById("faces").innerHTML = Object.entries(EX).map(([k, e]) =>
+  card(svg(remy({ face: k, pose: "idle", x: 0, y: 0 }), "-200 -870 400 480", "#fff"), e.name)).join("");
+document.getElementById("poses").innerHTML = Object.entries(POSE).map(([k, p]) =>
+  card(svg(remy({ pose: k, face: k === "cheer" ? "happy" : k === "think" ? "side" : "cheeky", x: 0, y: 0 }), "-300 -900 600 940", LOOKS.wine.bg), p.name)).join("");
+</script>

@@ -34,14 +34,14 @@ for (let p = 0; p < N; p++) {
 }
 for (let y = 330; y < 556; y++) for (let x = 160; x < 396; x++) { const p = y * W + x; if (cls[p] === id("mouth") || cls[p] === id("white") || cls[p] === 255) cls[p] = id("skin"); }
 
-// 3. restyle the hair: a tall quiff swept forward, and one lock falling on the forehead
-const QUIFF = [[250, 215], [275, 185], [320, 160], [370, 146], [420, 148], [458, 166], [440, 188], [427, 214], [421, 256], [402, 296], [330, 282], [260, 240]];
-const LOCK = [[245, 338], [306, 325], [286, 352], [262, 398], [257, 362]];
+// 3. restyle the hair: same height as the drawing, spikes rounded into soft tufts (a curve that covers the old outline)
+const curve = segs => { const pts = [segs[0]]; for (let i = 1; i < segs.length; i++) { const [a, b, c, d] = segs[i], [x0, y0] = pts[pts.length - 1]; if (c === undefined) { pts.push([a, b]); continue; } for (let t = 1; t <= 12; t++) { const u = t / 12; pts.push([(1 - u) ** 2 * x0 + 2 * (1 - u) * u * a + u * u * c, (1 - u) ** 2 * y0 + 2 * (1 - u) * u * b + u * u * d]); } } return pts; };
+const QUIFF = curve([[96, 345], [104, 300], [108, 262, 150, 228], [160, 242, 170, 238], [186, 204, 226, 194], [236, 202, 246, 198], [262, 176, 296, 184], [306, 194, 316, 190], [334, 172, 366, 180], [376, 190, 384, 188], [414, 184, 424, 210], [436, 226, 426, 250], [420, 278, 411, 301], [380, 292], [250, 292], [120, 302]]);
 const ink0 = mask((x, y, p) => cls[p] === id("ink")), sil0 = mask((x, y, p) => cls[p] !== id("bg"));
-const Q = mask((x, y) => x > 240 && x < 470 && y > 140 && y < 300 && inPoly(QUIFF, x, y));
+const Q = mask((x, y) => x > 90 && x < 440 && y > 170 && y < 350 && inPoly(QUIFF, x, y));
 const sil = sil0.map((v, p) => v | Q[p]), inner = grow(sil, 10, true), nearQ = grow(Q, 14), nearQ6 = grow(Q, 6);
 const ink = ink0.map((v, p) => (v && !(nearQ6[p] && inner[p])) || (sil[p] && !inner[p] && nearQ[p]) ? 1 : 0);
-const hair = mask((x, y, p) => !ink[p] && (cls[p] === id("hair") || Q[p] || (y > 320 && y < 400 && x > 240 && x < 310 && inPoly(LOCK, x, y) && cls[p] === id("skin"))));
+const hair = mask((x, y, p) => !ink[p] && (cls[p] === id("hair") || Q[p]));
 
 // 4. outfit: ringer tee (collar and hem bands) over the old shirt shape
 const shirt = mask((x, y, p) => cls[p] === id("shirt"));

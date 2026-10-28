@@ -7,7 +7,7 @@
   const L10 = ln(10), L9 = ln(9);
 
   const LOOKS = {
-    wine:  { name: "Tóc hồng rượu đậm · áo cam mơ viền đỏ rượu · túi mận", hair: "#b3305f", skin: "#fee8e1", shirt: "#f7a35c", trim: "#7d2148", bag: "#3a2747", stripe: "#e0668e", bg: "#ae7f87" },
+    wine:  { name: "Tóc hồng rượu đậm, lọn mềm · áo cam mơ viền đỏ rượu · túi mận", hair: "#b3305f", skin: "#fee8e1", shirt: "#f7a35c", trim: "#7d2148", bag: "#3a2747", stripe: "#e0668e", bg: "#ae7f87" },
     original: { name: "Bản màu gốc (ảnh photoshop)", hair: "#d05e7f", skin: "#fee8e1", shirt: "#fdd27c", trim: "#fdd27c", bag: "#483957", stripe: "#d26384", bg: "#ae7f87" },
   };
 
@@ -68,13 +68,16 @@
     idle:    { name: "Đứng thả tay", arms: `${SL} Q166 660 156 722 ${SR} Q350 670 352 724`, hands: mitt(154, 746, 80, 24, 20) + mitt(354, 748, 95, 24, 20) },
   };
 
+  const STRANDS = "M158 282 Q176 258 202 248 M236 238 Q258 216 286 208 M316 226 Q338 206 362 202 M392 224 Q410 230 414 252";
   const legs = `<path d="M212 776 Q214 870 218 972 M305 776 Q316 876 330 972" fill="none" ${L10}/>` +
     `<path d="M204 966 Q198 998 226 998 H262 Q274 998 268 986 Q258 970 232 968Z" fill="${INK}" ${ln(6)}/><path d="M316 966 Q310 998 338 998 H374 Q386 998 380 986 Q370 970 344 968Z" fill="${INK}" ${ln(6)}/>`;
 
   function remy({ x = 0, y = 0, s = 1, pose = "shrug", face: fname = "cheeky", look = "wine", hairColor = null, flip = false } = {}) {
     const A = g.REMY2_ART, L = LOOKS[look] || LOOKS.wine, P = POSE[pose] || POSE.shrug;
     const fill = { skin: L.skin, hair: hairColor || L.hair, shirt: L.shirt, trim: L.trim, bag: L.bag, bagStripe: L.stripe, ink: INK };
-    const upper = ["skin", "hair", "shirt", "trim", "bag", "bagStripe", "ink"].map(k => `<path d="${A[k]}" fill="${fill[k]}" fill-rule="evenodd"/>`).join("");
+    const paths = k => `<path d="${A[k]}" fill="${fill[k]}" fill-rule="evenodd"/>`;
+    // a few strand lines so the hair reads as hair, not a cap
+    const upper = ["skin", "hair"].map(paths).join("") + `<path d="${STRANDS}" fill="none" stroke="#000" stroke-opacity=".22" stroke-width="6" stroke-linecap="round"/>` + ["shirt", "trim", "bag", "bagStripe", "ink"].map(paths).join("");
     const arms = `<path d="${P.arms}" fill="none" ${L10}/>`, hands = P.hands.replace(/SKIN/g, L.skin);
     // origin at the midpoint between the feet; flip mirrors the character to face left
     return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s}) translate(-290 -1000)">${legs}${arms}${upper}${face(fname)}${hands}</g>`;

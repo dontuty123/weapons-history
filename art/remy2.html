@@ -14,6 +14,7 @@
   .g4{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
   .card img,.card svg{display:block;width:100%;height:auto}
+  .how{max-width:76ch;padding-left:22px;color:var(--muted)} .how li{margin-bottom:10px} .how b{color:var(--ink)} code{font-size:.92em;background:#e7e4dc;border-radius:4px;padding:1px 5px}
   .card b{display:block;padding:8px 12px;font-size:15px}
 </style>
 <div class="wrap">
@@ -26,6 +27,14 @@
 <div class="grid g4" id="faces"></div>
 <h2>Tư thế</h2>
 <div class="grid g4" id="poses"></div>
+<h2>Cách tạo</h2>
+<p>Nhân vật này là bản vẽ tay của bạn ghép với code, không vẽ bằng phần mềm vẽ nào.</p>
+<ol class="how">
+  <li><b>Lấy nét từ ảnh bạn photoshop (đầu, tóc, thân áo, túi).</b> Chương trình Node <code>art/tools/remy2-trace.js</code> đọc ảnh <code>art/src/remy2-photoshop.png</code> từng điểm ảnh và xếp mỗi điểm vào một nhóm màu: nét đen, da, tóc, áo, túi, nền. Mỗi nhóm thành một lớp; công cụ miễn phí potrace đổi từng lớp thành hình vector, nên phóng to không vỡ mà vẫn giữ nét dày mỏng tay vẽ. Trong lúc tách lớp, chương trình xóa mắt, miệng, tay, chân để code vẽ lại; vẽ lại viền tóc thành các lọn mềm rồi tự kẻ nét đen quanh viền mới; chia áo thành thân, viền cổ, gấu áo để tô màu riêng. Kết quả lưu ở <code>art/remy2-art.js</code>.</li>
+  <li><b>Code vẽ mặt, tay, chân, giày.</b> <code>art/remy2.js</code> vẽ bằng SVG. Mỗi biểu cảm là một bộ mắt, lông mày, miệng, cả bộ xoay nghiêng 11 độ cho khớp đầu nghiêng trong ảnh. Mỗi tư thế tay là một đường cong từ vai ra, cộng bàn tay tròn như ảnh gốc. Màu tóc, áo, túi là thông số, đổi bằng một dòng.</li>
+  <li><b>Ghép lại.</b> Code xếp lớp theo thứ tự chân, tay, thân và đầu, mặt, bàn tay. Gọi kiểu <code>remy({pose:"wave", face:"smug"})</code> là ra hình.</li>
+</ol>
+<p><b>Hạn chế:</b> đầu và thân là nét cố định từ ảnh, nên Remy luôn đứng một góc nghiêng như ảnh gốc. Muốn nhìn thẳng, quay sang hướng khác hay quay lưng, cần photoshop thêm một ảnh ở góc đó rồi chạy lại cách lấy nét này.</p>
 </div>
 <script src="remy2-art.js?v=3"></script>
 <script src="remy2.js?v=3"></script>
